@@ -5,7 +5,13 @@ import Data.List
 
 responseFor :: String -> String
 responseFor str
-    | last str == head "?"     = "Sure."
-    | all isUpper str          = "Whoa, chill out!"
-    | str == "Bob"             = "Fine. Be that way!"
-    | otherwise                = "Whatever."
+    | isLastChar str "?"                      = "Sure."
+    | (all isUpper str || isLastChar str "1") = "Whoa, chill out!"
+    | str == ""                               = "Fine. Be that way!"
+    | otherwise                               = "Whatever."
+
+
+isLastChar :: String -> String -> Bool
+isLastChar h n
+    | last h == head n = True
+    | otherwise        = False
