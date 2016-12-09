@@ -6,7 +6,7 @@ import Data.List
 responseFor :: String -> String
 responseFor str
     | isLastChar str "?"                      = "Sure."
-    | (all isUpper str || isLastChar str "1") = "Whoa, chill out!"
+    | (all isUpper str || isLastChar str "!") = "Whoa, chill out!"
     | str == ""                               = "Fine. Be that way!"
     | otherwise                               = "Whatever."
 
