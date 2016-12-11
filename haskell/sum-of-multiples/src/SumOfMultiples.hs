@@ -1,9 +1,11 @@
 module SumOfMultiples (sumOfMultiples) where
 
+import Data.List
+
 sumOfMultiples :: [Int] -> Int -> Int
 sumOfMultiples [] limit = 0
 sumOfMultiples factors limit = sum multiples
-    where multiples = makeMultiples factors [] limit
+    where multiples = nub (makeMultiples factors [] limit)
 
 makeMultiples :: [Int] -> [Int] -> Int -> [Int] 
 makeMultiples [] output limit = output
