@@ -7,5 +7,4 @@ sumOfMultiples factors limit = sum multiples
 
 makeMultiples :: [Int] -> [Int] -> Int -> [Int] 
 makeMultiples [] output limit = output
-makeMultiples (x:xs) output limit = makeMultiples xs (output ++ [x, xx..limit]) limit
-    where xx = x+x
+makeMultiples (x:xs) output limit = makeMultiples xs (output ++ [x, (x+x)..(limit-1)]) limit
