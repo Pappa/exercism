@@ -9,7 +9,9 @@ difference num
           b = sumOfSquares num
 
 squareOfSums :: Integral a => a -> a
-squareOfSums num = 0
+squareOfSums num = summed*summed
+    where summed = sum [0..num]
 
 sumOfSquares :: Integral a => a -> a
-sumOfSquares num = 0
+sumOfSquares num = sum squares
+    where squares = map (**) [0..num]
