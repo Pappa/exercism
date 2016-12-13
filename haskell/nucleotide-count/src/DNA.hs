@@ -9,5 +9,5 @@ count = undefined
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts str = Data.Map.fromList $ Prelude.map createTuple $ group $ sort str
 
-createTuple :: (Char, Int)
+createTuple :: String -> (Char, Int)
 createTuple l = (head l, length l)
