@@ -27,3 +27,8 @@ createTuple l = (head l, length l)
 -- , ('C', 0)
 --, ('G', 0)
 -- , ('T', 0) ]
+
+
+
+--Data.Map.lookup
+--Data.Map.insert
