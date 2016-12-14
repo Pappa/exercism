@@ -10,12 +10,9 @@ import Data.Either (isLeft)
 count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
-    | length invalidChars > 0 = Left "Bork!"
-    | otherwise = Right $ length $ filter (==nucleotide) strand
---    | isLeft counts = Left counts
---    | otherwise = Right $ (Map.lookup nucleotide counts)
---    where counts :: Either String (Map Char Int)
---          counts = nucleotideCounts strand
+    | length strand == 0 = Right 0
+    | length invalidChars == 0 = Right $ length $ filter (==nucleotide) strand
+    | otherwise = Left "Bork!"
     where invalidChars :: String
           invalidChars = List.filter (not . (`elem` "ACGT"))  strand
 
