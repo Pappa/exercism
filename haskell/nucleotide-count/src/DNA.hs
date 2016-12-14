@@ -8,8 +8,8 @@ import Data.Maybe (fromMaybe)
 count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
-    | counts /= "Bork!" = Right $ fromMaybe 0 (Map.lookup nucleotide counts)
-    | otherwise = Left $ counts
+    | counts == "Bork!" = Left counts
+    | otherwise = Right $ fromMaybe 0 (Map.lookup nucleotide counts)
     where counts :: Either String (Map Char Int)
           counts = nucleotideCounts strand
 
