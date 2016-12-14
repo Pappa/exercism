@@ -17,10 +17,11 @@ count nucleotide strand
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts str
     | length invalidChars > 0 = Left "Bork!"
-    | otherwise = Right $ Map.fromList (counts)
+    | otherwise = Right $ counts
     where invalidChars :: String
           invalidChars = List.filter (not . (`elem` "ACGT"))  str
-          counts = List.map (\x -> (head x, length x)) . List.group $ List.sort str
+          counts :: (Map Char Int)
+          counts = Map.fromList $ List.map (\x -> (head x, length x)) . List.group $ List.sort str
 
 
 --Data.Map.lookup
