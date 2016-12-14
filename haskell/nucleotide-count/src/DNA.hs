@@ -3,16 +3,15 @@ module DNA (count, nucleotideCounts) where
 import Data.Map (Map)
 import qualified Data.Map as Map
 import qualified Data.List as List
-import Data.Maybe (fromJust)
+import Data.Maybe (fromMaybe)
 
 count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
-    | value /= Nothing = Right $ (fromJust value)
-    | value == Nothing = Right $ 0
+    | value >= 0 = Right $ value
     | otherwise = Left "Bork!"
-    where value :: Maybe Int
-          value = Map.lookup nucleotide (nucleotideCounts strand)
+    where value :: Int
+          value = fromMaybe 0 (Map.lookup nucleotide (nucleotideCounts strand))
 
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts str
