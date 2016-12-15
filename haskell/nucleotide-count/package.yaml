@@ -8,6 +8,7 @@ library:
   exposed-modules: DNA
   source-dirs: src
   dependencies:
+    - MissingH
   # - foo       # List here the packages you
   # - bar       # want to use in your solution.
 
