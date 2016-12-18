@@ -10,10 +10,8 @@ import Data.Either.Utils (fromRight)
 count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
-    | isInvalidNucleotide nucleotide = Left e
-    | isInvalidStrand strand = Left e
+    | (isInvalidNucleotide nucleotide || isInvalidStrand strand) = Left "Bork!"
     | otherwise = Right $ length $ filter (==nucleotide) strand
-    where e = "Bork!"
 
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts strand
