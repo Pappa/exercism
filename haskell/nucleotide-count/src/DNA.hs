@@ -5,7 +5,7 @@ import qualified Data.Map as Map
 import qualified Data.List as List
 import Data.Either (isLeft)
 import Data.Either.Utils (fromRight)
-import Control.Monad
+--import Control.Monad
 
 
 count :: Char -> String -> Either String Int
@@ -31,7 +31,7 @@ nucleotides :: String
 nucleotides = "ACGT"
 
 getCount :: Char -> String -> Int
-getCount c str
-    | isLeft ccount = 0
-    | otherwise = fromRight ccount
-    where ccount = count c str
+getCount nucleotide strand
+    | isLeft nCount = 0
+    | otherwise = fromRight nCount
+    where nCount = count nucleotide strand
