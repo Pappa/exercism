@@ -11,21 +11,18 @@ import Data.Either.Utils (fromRight)
 count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
-    | (isInvalidNucleotide nucleotide || isInvalidStrand strand) = Left "Bork!"
-    | otherwise = Right $ length $ filter (==nucleotide) strand
+    | isValidNucleotide nucleotide && all isValidNucleotide strand = Right $ length $ filter (==nucleotide) strand
+    | otherwise = Left "Bork!"
 
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts strand
-    | isInvalidStrand strand = Left "Bork!"
-    | otherwise = Right $ Map.fromList $ counts
+    | all isValidNucleotide strand = Right $ Map.fromList $ counts
+    | otherwise = Left "Bork!"
     where counts :: [(Char, Int)]
           counts = fmap (\nucleotide -> ((nucleotide, getCount nucleotide strand))) nucleotides
 
-isInvalidStrand :: String -> Bool
-isInvalidStrand strand = any isInvalidNucleotide strand
-
-isInvalidNucleotide :: Char -> Bool
-isInvalidNucleotide nucleotide = not $ (nucleotide `elem` nucleotides)
+isValidNucleotide :: Char -> Bool
+isValidNucleotide nucleotide = nucleotide `elem` nucleotides
 
 nucleotides :: String
 nucleotides = "ACGT"
