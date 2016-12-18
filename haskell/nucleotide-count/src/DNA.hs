@@ -23,7 +23,7 @@ nucleotideCounts strand
           counts = List.map (\k -> (getCount k strand)) nucleotides
 
 isInvalidStrand :: String -> Bool
-isInvalidStrand strand = any (not . (`elem` nucleotides)) strand
+isInvalidStrand strand = any isInvalidNucleotide strand
 
 isInvalidNucleotide :: Char -> Bool
 isInvalidNucleotide nucleotide = not $ (nucleotide `elem` nucleotides)
