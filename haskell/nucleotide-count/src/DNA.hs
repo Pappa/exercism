@@ -11,23 +11,22 @@ count :: Char -> String -> Either String Int
 count _ [] = Right 0
 count nucleotide strand
     | not $ (nucleotide `elem` strand) = Left e
-    | length (getInvalidChars strand) > 0 = Left e
+    | isInvalidStrand strand = Left e
     | otherwise = Right $ length $ filter (==nucleotide) strand
     where e = "Bork!"
 
 nucleotideCounts :: String -> Either String (Map Char Int)
 nucleotideCounts strand
-    | length strand == 0 = Right $ Map.fromList countMap
-    | length (getInvalidChars strand) > 0 = Left "Bork!"
+    | isInvalidStrand strand = Left "Bork!"
     | otherwise = Right $ Map.fromList $ counts
     where counts :: [(Char, Int)]
-          counts = List.map (\(k, v) -> (getCount k strand)) countMap
+          counts = List.map (\k -> (getCount k strand)) nucleotides
 
-getInvalidChars :: String -> String
-getInvalidChars str = List.filter (not . (`elem` "ACGT")) str
+isInvalidStrand :: String -> Bool
+isInvalidStrand strand = List.any (not . (`elem` nucleotides)) strand
 
-countMap :: [(Char, Int)]
-countMap = [ ('A', 0), ('C', 0), ('G', 0), ('T', 0) ]
+nucleotides :: String
+nucleotides = "ACGT"
 
 getCount :: Char -> String -> (Char, Int)
 getCount c str
