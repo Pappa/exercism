@@ -5,6 +5,7 @@ import qualified Data.Map as Map
 import qualified Data.List as List
 import Data.Either (isLeft)
 import Data.Either.Utils (fromRight)
+import Control.Monad
 
 
 count :: Char -> String -> Either String Int
@@ -18,7 +19,7 @@ nucleotideCounts strand
     | isInvalidStrand strand = Left "Bork!"
     | otherwise = Right $ Map.fromList $ counts
     where counts :: [(Char, Int)]
-          counts = fmap (\nucleotide -> (getCount nucleotide strand)) nucleotides
+          counts = fmap (\nucleotide -> ((nucleotide, getCount nucleotide strand))) nucleotides
 
 isInvalidStrand :: String -> Bool
 isInvalidStrand strand = any isInvalidNucleotide strand
@@ -29,8 +30,8 @@ isInvalidNucleotide nucleotide = not $ (nucleotide `elem` nucleotides)
 nucleotides :: String
 nucleotides = "ACGT"
 
-getCount :: Char -> String -> (Char, Int)
+getCount :: Char -> String -> Int
 getCount c str
-    | isLeft ccount = (c, 0)
-    | otherwise = (c, fromRight ccount)
+    | isLeft ccount = 0
+    | otherwise = fromRight ccount
     where ccount = count c str
