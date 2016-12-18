@@ -18,7 +18,7 @@ nucleotideCounts strand
     | isInvalidStrand strand = Left "Bork!"
     | otherwise = Right $ Map.fromList $ counts
     where counts :: [(Char, Int)]
-          counts = List.map (\k -> (getCount k strand)) nucleotides
+          counts = fmap (\nucleotide -> (getCount nucleotide strand)) nucleotides
 
 isInvalidStrand :: String -> Bool
 isInvalidStrand strand = any isInvalidNucleotide strand
