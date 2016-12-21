@@ -5,7 +5,7 @@ type Student = String
 type GradeBook = [(Grade, [Student])]
 
 add :: Grade -> Student -> GradeBook -> GradeBook
-add grade name gradeBook = []
+add grade name gradeBook = [(grade, [name])]
 
 empty :: GradeBook
 empty = []
