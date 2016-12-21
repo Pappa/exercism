@@ -1,9 +1,17 @@
 module School (School, add, empty, grade, sorted) where
 
-add = undefined
+type Grade = Int
+type Student = String
+type GradeBook = [(Grade, [Student])]
 
-empty = undefined
+add :: Grade -> Student -> GradeBook -> GradeBook
+add grade name gradeBook = []
 
-grade = undefined
+empty :: GradeBook
+empty = []
 
-sorted = undefined
+grade :: Grade -> GradeBook -> [Student]
+grade = []
+
+sorted :: GradeBook -> GradeBook
+sorted = []
