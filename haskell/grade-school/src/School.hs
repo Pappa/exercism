@@ -1,4 +1,4 @@
-module School (School, add, empty, grade, sorted) where
+module School (add, empty, grade, sorted) where
 
 type Grade = Int
 type Student = String
@@ -11,7 +11,7 @@ empty :: GradeBook
 empty = []
 
 grade :: Grade -> GradeBook -> [Student]
-grade = []
+grade g gradeBook = []
 
 sorted :: GradeBook -> GradeBook
-sorted = []
+sorted gradeBook = []
