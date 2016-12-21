@@ -1,17 +1,20 @@
-module School (add, empty, grade, sorted) where
+module School (School, add, empty, grade, sorted) where
+
+import qualified Data.List as L
+import qualified Data.Map as M
 
 type Grade = Int
 type Student = String
-type GradeBook = [(Grade, [Student])]
+type School = M.Map Grade [Student]
 
-add :: Grade -> Student -> GradeBook -> GradeBook
-add grade name gradeBook = [(grade, [name])]
+add :: Grade -> Student -> School -> School
+add g name = M.insertWith (++) g [name]
 
-empty :: GradeBook
-empty = []
+empty :: School
+empty = M.empty
 
-grade :: Grade -> GradeBook -> [Student]
-grade g gradeBook = []
+grade :: Grade -> School -> [Student]
+grade g = L.sort . M.findWithDefault [] g
 
-sorted :: GradeBook -> GradeBook
-sorted gradeBook = []
+sorted :: School -> [(Grade, [Student])]
+sorted = M.toList . fmap L.sort
