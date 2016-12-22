@@ -5,8 +5,8 @@ import qualified Data.Map as M
 import Data.Char (toLower)
 
 transform :: Map Int String -> Map Char Int
-transform input = M.fromList $ fmap transformItem $ M.toList input
+transform input = M.fromList $ concat $ fmap transformItem $ M.toList input
 
-transformItem :: (Int, String) -> (Char, Int)
-transformItem (i, s:[]) = (toLower s, i)
-transformItem (i, s:ss) = (toLower s, i)
+transformItem :: (Int, String) -> [(Char, Int)]
+transformItem (i, ss) = fmap (\s -> (toLower s, i)) ss
+
