@@ -12,13 +12,17 @@ number :: String -> Maybe String
 number phoneNumber
     | length phone < 10 = Nothing
     | length phone == 10 = Just phone
-    | length phone == 11 && (head phone) == '1' = Just (tail phone)
+    | length phone == 11 &&
+        (head phone) == '1' = Just (tail phone)
     | length phone > 10 = Nothing
     where phone = validNumbers phoneNumber
 
 prettyPrint :: String -> Maybe String
 prettyPrint phoneNumber
-    | isJust phone = Just $ "(" ++ (take 3 $ fromJust phone) ++ ") " ++ (take 3 $ drop 3 $ fromJust phone) ++ "-" ++ (drop 6 $ fromJust phone)
+    | isJust phone = Just $ "(" ++ 
+        (take 3 $ fromJust phone) ++ ") " ++ 
+        (take 3 $ drop 3 $ fromJust phone) ++ "-" ++ 
+        (drop 6 $ fromJust phone)
     | otherwise = Nothing 
     where phone = number phoneNumber
 
