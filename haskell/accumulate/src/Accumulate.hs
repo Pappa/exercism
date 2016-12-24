@@ -1,4 +1,4 @@
 module Accumulate (accumulate) where
 
 accumulate :: (a -> b) -> [a] -> [b]
-accumulate = undefined
+accumulate f a = fmap f a
