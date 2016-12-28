@@ -29,8 +29,4 @@ isScalene a b c
     | otherwise = False
 
 isIllegal :: Float -> Float -> Float -> Bool
-isIllegal a b c
-    | (a + b) < c = True
-    | (a + c) < b = True
-    | (b + c) < a = True
-    | otherwise = False
+isIllegal a b c = a + b < c || a + c < b || b + c < a
