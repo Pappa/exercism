@@ -1,19 +1,16 @@
 module Scrabble (scoreLetter, scoreWord) where
 
-import Data.List
+import Data.List (find)
 import Data.Maybe (isNothing, fromJust)
 import Data.Char (toUpper)
 
 scoreLetter :: Char -> Int
 scoreLetter letter
-    | isNothing scoreTuple = 0
-    | otherwise = snd $ fromJust scoreTuple
-    where scoreTuple = find (findScore letter) scores
+    | isNothing score = 0
+    | otherwise = snd $ fromJust score
+    where score = find (\t -> (toUpper letter) `elem` (fst t)) scores
 
-findScore :: Char -> (String, Int) -> Bool
-findScore letter t = (toUpper letter) `elem` (fst t)
-
-scoreWord word = 0
+scoreWord word = sum $ fmap scoreLetter word
 
 scores :: [(String, Int)]
 scores = [
