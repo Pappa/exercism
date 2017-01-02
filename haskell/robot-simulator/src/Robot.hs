@@ -32,18 +32,18 @@ simulate robot (x:xs) = simulate (executeCommand robot x) xs
 
 executeCommand :: Robot -> Char -> Robot
 executeCommand robot c
-    | c == 'L' = (turnLeft $ fst robot, snd robot)
-    | c == 'R' = (turnRight $ fst robot, snd robot)
-    | c == 'A' = (fst robot, advance robot)
+    | c == 'L' = (turnLeft $ bearing robot, coordinates robot)
+    | c == 'R' = (turnRight $ bearing robot, coordinates robot)
+    | c == 'A' = (bearing robot, advance robot)
     | otherwise = robot
 
 advance :: Robot -> Coords
-advance robot = case (fst robot) of
+advance robot = case (bearing robot) of
     North -> (x, succ y)
     East -> (succ x, y)
     South -> (x, pred y)
     West -> (pred x, y)
-    where coords = snd robot
+    where coords = coordinates robot
           x = fst coords
           y = snd coords
 
