@@ -31,8 +31,7 @@ meetupDay schedule weekday year month = addDays offset firstOfMonthDay
         firstDayOfWeekOffset = getFirstDayOfWeekOffset schedule year month
         firstDayOfWeek = addDays (toInteger firstDayOfWeekOffset) firstOfMonthDay
         (_, _, firstDayOfWeekDayNumber) = toWeekDate firstDayOfWeek
-        firstDayOfWeekDay :: Weekday
-        firstDayOfWeekDay = toEnum (firstDayOfWeekDayNumber - 1)
+        firstDayOfWeekDay = getFirstDayOfWeekDay (firstDayOfWeekDayNumber - 1)
         dayOffset = getDayOffset weekday firstDayOfWeekDay 0
         offset = toInteger (firstDayOfWeekOffset + (firstDayOfWeekDayNumber - 1) + dayOffset)
 
@@ -47,6 +46,9 @@ getFirstDayOfWeekOffset schedule year month = case schedule of
     Fourth -> 21
     Last -> (gregorianMonthLength year month) - 7
     Teenth -> 12
+
+getFirstDayOfWeekDay :: Int -> Weekday
+getFirstDayOfWeekDay = toEnum
 
 getDayOffset :: Weekday -> Weekday -> Int -> Int
 getDayOffset targetDay startDay i
