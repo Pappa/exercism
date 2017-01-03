@@ -1,3 +1,4 @@
+{-# LANGUAGE BangPatterns #-}
 module ListOps
   ( length
   , reverse
@@ -13,7 +14,8 @@ import Prelude hiding
   ( length, reverse, map, filter, foldr, (++), concat )
 
 foldl' :: (b -> a -> b) -> b -> [a] -> b
-foldl' = undefined
+foldl' f !input ![] = input
+foldl' f !input !(x:xs) = foldl' f (f input x) xs
 
 foldr :: (a -> b -> b) -> b -> [a] -> b
 foldr = undefined
