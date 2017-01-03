@@ -1,6 +1,7 @@
 module Meetup (Weekday(..), Schedule(..), meetupDay) where
 
-import Data.Time.Calendar (Day, fromGregorian, gregorianMonthLength)
+import Data.Time.Calendar (Day, fromGregorian, gregorianMonthLength, addDays)
+import Data.Time.Calendar.WeekDate (toWeekDate)
 
 data Schedule = First
               | Second
@@ -17,32 +18,41 @@ data Weekday = Monday
              | Friday
              | Saturday
              | Sunday
-             deriving (Enum)
+             deriving (Enum, Eq)
 
 type Year = Integer
 type Month = Int
 
 meetupDay :: Schedule -> Weekday -> Year -> Month -> Day
-meetupDay schedule weekday year month = applyNTimes (firstDayOfWeekOffset + weekdayOffset) succ firstOfMonth
+meetupDay schedule weekday year month = addDays offset firstOfMonthDay
     where
-        firstOfMonth = fromGregorian year month 1
+        firstOfMonthDay = getFirstOfMonthDay year month
         daysInMonth = gregorianMonthLength year month
-        firstDayOfWeekOffset = case schedule of
-            First -> 0
-            Second -> 7
-            Third -> 14
-            Fourth -> 21
-            Last -> daysInMonth - 7
-            Teenth -> 12
-        weekdayOffset = case weekday of
-            Monday -> 0
-            Tuesday -> 1
-            Wednesday -> 2
-            Thursday -> 3
-            Friday -> 4
-            Saturday -> 5
-            Sunday -> 6
+        firstDayOfWeekOffset = getFirstDayOfWeekOffset schedule year month
+        firstDayOfWeek = addDays (toInteger firstDayOfWeekOffset) firstOfMonthDay
+        (_, _, firstDayOfWeekDayNumber) = toWeekDate firstDayOfWeek
+        firstDayOfWeekDay :: Weekday
+        firstDayOfWeekDay = toEnum (firstDayOfWeekDayNumber - 1)
+        dayOffset = getDayOffset weekday firstDayOfWeekDay 0
+        offset = toInteger (firstDayOfWeekOffset + (firstDayOfWeekDayNumber - 1) + dayOffset)
 
-applyNTimes :: Int -> (a -> a) -> a -> a
-applyNTimes 0 _ val = val
-applyNTimes n f val = foldl (\s e -> e s) val [f | x <- [1..n]]
+getFirstOfMonthDay :: Year -> Month -> Day
+getFirstOfMonthDay year month = fromGregorian year month 1
+
+getFirstDayOfWeekOffset :: Schedule -> Year -> Month -> Int
+getFirstDayOfWeekOffset schedule year month = case schedule of
+    First -> 0
+    Second -> 7
+    Third -> 14
+    Fourth -> 21
+    Last -> (gregorianMonthLength year month) - 7
+    Teenth -> 12
+
+getDayOffset :: Weekday -> Weekday -> Int -> Int
+getDayOffset targetDay startDay i
+    | targetDay == startDay = i
+    | otherwise = getDayOffset targetDay (nextDay startDay) (i + 1)
+
+nextDay :: Weekday -> Weekday
+nextDay Sunday = Monday
+nextDay b = succ b
