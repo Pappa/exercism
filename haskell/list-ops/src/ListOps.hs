@@ -46,4 +46,11 @@ filter p (x:xs)
 (x:xs) ++ ys = x : xs ++ ys
 
 concat :: [[a]] -> [a]
-concat = undefined
+concat [] = []
+concat l = c l []
+    where
+        c [] acc = acc
+        c (x:xs) acc = c xs $ pushAll acc x
+        pushAll :: [a] -> [a] -> [a]
+        pushAll acc [] = acc
+        pushAll acc (x:xs) = pushAll (acc ++ [x]) xs
