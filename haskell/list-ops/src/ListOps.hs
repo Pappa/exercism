@@ -18,7 +18,8 @@ foldl' f !input ![] = input
 foldl' f !input !(x:xs) = foldl' f (f input x) xs
 
 foldr :: (a -> b -> b) -> b -> [a] -> b
-foldr = undefined
+foldr f input [] = input
+foldr f input (x:xs) = f x $ foldr f input xs
 
 length :: [a] -> Int
 length [] = 0
