@@ -47,10 +47,4 @@ filter p (x:xs)
 
 concat :: [[a]] -> [a]
 concat [] = []
-concat l = c l []
-    where
-        c [] acc = reverse acc
-        c (x:xs) acc = c xs $ pushAll acc x
-        pushAll :: [a] -> [a] -> [a]
-        pushAll acc [] = acc
-        pushAll acc (x:xs) = pushAll (x:acc) xs
+concat l = foldr (++) [] l
