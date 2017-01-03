@@ -42,7 +42,8 @@ filter p (x:xs)
     | otherwise = filter p xs
 
 (++) :: [a] -> [a] -> [a]
-xs ++ ys = undefined
+[] ++ ys = ys
+(x:xs) ++ ys = x : xs ++ ys
 
 concat :: [[a]] -> [a]
 concat = undefined
