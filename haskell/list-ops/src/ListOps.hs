@@ -26,10 +26,8 @@ length [] = 0
 length xs = sum $ map (\_ -> 1 :: Int) xs
 
 reverse :: [a] -> [a]
-reverse l =  rev l []
-    where
-        rev [] a     = a
-        rev (x:xs) a = rev xs (x:a)
+reverse [] = []
+reverse xs = last xs : reverse (init xs)
 
 map :: (a -> b) -> [a] -> [b]
 map _ [] = []
