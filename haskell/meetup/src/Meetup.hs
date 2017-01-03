@@ -23,17 +23,17 @@ type Year = Integer
 type Month = Int
 
 meetupDay :: Schedule -> Weekday -> Year -> Month -> Day
-meetupDay schedule weekday year month = applyNTimes (firstDayOfWeekOffset + weekdayOffset -1) succ firstOfMonth
+meetupDay schedule weekday year month = applyNTimes (firstDayOfWeekOffset + weekdayOffset) succ firstOfMonth
     where
         firstOfMonth = fromGregorian year month 1
         daysInMonth = gregorianMonthLength year month
         firstDayOfWeekOffset = case schedule of
-            First -> 1
-            Second -> 8
-            Third -> 15
-            Fourth -> 22
+            First -> 0
+            Second -> 7
+            Third -> 14
+            Fourth -> 21
             Last -> daysInMonth - 7
-            Teenth -> 13
+            Teenth -> 12
         weekdayOffset = case weekday of
             Monday -> 0
             Tuesday -> 1
