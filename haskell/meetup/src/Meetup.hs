@@ -18,7 +18,7 @@ data Weekday = Monday
              | Friday
              | Saturday
              | Sunday
-             deriving (Enum, Eq)
+             deriving (Enum, Eq, Show)
 
 type Year = Integer
 type Month = Int
@@ -27,13 +27,12 @@ meetupDay :: Schedule -> Weekday -> Year -> Month -> Day
 meetupDay schedule weekday year month = addDays offset firstOfMonthDay
     where
         firstOfMonthDay = getFirstOfMonthDay year month
-        daysInMonth = gregorianMonthLength year month
         firstDayOfWeekOffset = getFirstDayOfWeekOffset schedule year month
         firstDayOfWeek = addDays (toInteger firstDayOfWeekOffset) firstOfMonthDay
         (_, _, firstDayOfWeekDayNumber) = toWeekDate firstDayOfWeek
         firstDayOfWeekDay = getFirstDayOfWeekDay (firstDayOfWeekDayNumber - 1)
         dayOffset = getDayOffset weekday firstDayOfWeekDay 0
-        offset = toInteger (firstDayOfWeekOffset + (firstDayOfWeekDayNumber - 1) + dayOffset)
+        offset = toInteger (firstDayOfWeekOffset + dayOffset)
 
 getFirstOfMonthDay :: Year -> Month -> Day
 getFirstOfMonthDay year month = fromGregorian year month 1
