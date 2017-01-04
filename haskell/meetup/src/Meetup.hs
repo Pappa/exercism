@@ -3,22 +3,11 @@ module Meetup (Weekday(..), Schedule(..), meetupDay) where
 import Data.Time.Calendar (Day, fromGregorian, gregorianMonthLength, addDays)
 import Data.Time.Calendar.WeekDate (toWeekDate)
 
-data Schedule = First
-              | Second
-              | Third
-              | Fourth
-              | Last
-              | Teenth
+data Schedule = First | Second | Third | Fourth | Last | Teenth
               deriving (Enum)
 
-data Weekday = Monday
-             | Tuesday
-             | Wednesday
-             | Thursday
-             | Friday
-             | Saturday
-             | Sunday
-             deriving (Enum, Eq, Show)
+data Weekday = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+             deriving (Enum, Eq)
 
 type Year = Integer
 type Month = Int
