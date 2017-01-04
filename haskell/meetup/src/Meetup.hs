@@ -24,30 +24,21 @@ type Year = Integer
 type Month = Int
 
 meetupDay :: Schedule -> Weekday -> Year -> Month -> Day
-meetupDay schedule weekday year month = addDays offset firstOfMonthDay
+meetupDay schedule weekday year month = addDays totalOffset monthStartDay
     where
-        firstOfMonthDay = getFirstOfMonthDay year month
-        firstDayOfWeekOffset = getFirstDayOfWeekOffset schedule year month
-        firstDayOfWeek = addDays (toInteger firstDayOfWeekOffset) firstOfMonthDay
-        (_, _, firstDayOfWeekDayNumber) = toWeekDate firstDayOfWeek
-        firstDayOfWeekDay = getFirstDayOfWeekDay (firstDayOfWeekDayNumber - 1)
-        dayOffset = getDayOffset weekday firstDayOfWeekDay 0
-        offset = toInteger (firstDayOfWeekOffset + dayOffset)
-
-getFirstOfMonthDay :: Year -> Month -> Day
-getFirstOfMonthDay year month = fromGregorian year month 1
-
-getFirstDayOfWeekOffset :: Schedule -> Year -> Month -> Int
-getFirstDayOfWeekOffset schedule year month = case schedule of
-    First -> 0
-    Second -> 7
-    Third -> 14
-    Fourth -> 21
-    Last -> (gregorianMonthLength year month) - 7
-    Teenth -> 12
-
-getFirstDayOfWeekDay :: Int -> Weekday
-getFirstDayOfWeekDay = toEnum
+        monthStartDay = fromGregorian year month 1
+        weekStartOffset = case schedule of
+            First -> 0
+            Second -> 7
+            Third -> 14
+            Fourth -> 21
+            Last -> (gregorianMonthLength year month) - 7
+            Teenth -> 12
+        weekStartDay = addDays (toInteger weekStartOffset) monthStartDay
+        (_, _, dayNumber) = toWeekDate weekStartDay
+        weekStartDayName = toEnum (dayNumber - 1) :: Weekday
+        weekdayOffset = getDayOffset weekday weekStartDayName 0
+        totalOffset = toInteger (weekStartOffset + weekdayOffset)
 
 getDayOffset :: Weekday -> Weekday -> Int -> Int
 getDayOffset targetDay startDay i
