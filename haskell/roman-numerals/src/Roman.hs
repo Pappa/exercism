@@ -25,8 +25,7 @@ repeater :: Int -> (String, Int)
 repeater n = (x, r)
     where 
         (q, r) = quotRem n i
-        x = replicate q c
         (i, c) = fromMaybe (1, 'I') (find ((n>=) . fst) nums)
+        x = replicate q c
 
-nums :: [(Int, Char)]
 nums = [(1000, 'M'), (500, 'D'), (100, 'C'), (50, 'L'), (10, 'X'), (5, 'V')]
