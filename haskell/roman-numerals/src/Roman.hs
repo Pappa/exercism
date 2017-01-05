@@ -1,5 +1,8 @@
 module Roman (numerals) where
 
+import Data.List (find)
+import Data.Maybe (fromMaybe)
+
 numerals :: Int -> Maybe String
 numerals n
     | n < 1 || n > 3000 = Nothing
@@ -21,13 +24,9 @@ numerals' n s
 repeater :: Int -> (String, Int)
 repeater n = (x, r)
     where 
-    	(q, r) = quotRem n i
-    	x = replicate q c
-    	(i, c)
-    	    | n >= 1000 = (1000, 'M')
-    	    | n >= 500 = (500, 'D')
-    	    | n >= 100 = (100, 'C')
-    	    | n >= 50 = (50, 'L')
-    	    | n >= 10 = (10, 'X')
-    	    | n >= 5 = (5, 'V')
-    	    | otherwise = (1, 'I')
+        (q, r) = quotRem n i
+        x = replicate q c
+        (i, c) = fromMaybe (1, 'I') (find ((n>=) . fst) nums)
+
+nums :: [(Int, Char)]
+nums = [(1000, 'M'), (500, 'D'), (100, 'C'), (50, 'L'), (10, 'X'), (5, 'V')]
