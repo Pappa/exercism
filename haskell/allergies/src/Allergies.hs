@@ -15,7 +15,7 @@ data Allergen = Eggs
 allergens = [Eggs .. Cats]
 
 allergies :: Int -> [Allergen]
-allergies n = filter (testBit n . fromEnum) allergens
+allergies n = filter (flip isAllergicTo n) allergens
 
 isAllergicTo :: Allergen -> Int -> Bool
 isAllergicTo a n = testBit n $ fromEnum a
