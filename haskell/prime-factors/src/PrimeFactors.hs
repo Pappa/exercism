@@ -1,13 +1,10 @@
 module PrimeFactors (primeFactors) where
 
 primeFactors :: Integer -> [Integer]
-primeFactors n
-    | n < 2 = []
-    | otherwise = reverse $ primeFactors' n [2..n] []
+primeFactors n = reverse $ primeFactors' n 2 []
 
-primeFactors' :: Integer -> [Integer] -> [Integer] -> [Integer]
-primeFactors' n [] output = output
-primeFactors' n input@(x:xs) output
-    | q > 0 && r == 0 = primeFactors' q input (x:output)
-    | otherwise = primeFactors' n xs output
-    where (q, r) = quotRem n x
+primeFactors' :: Integer -> Integer -> [Integer] -> [Integer]
+primeFactors' n x xs
+    | n < 2 = xs
+    | n `mod` x == 0 = primeFactors' (n `div` x) x (x:xs)
+    | otherwise = primeFactors' n (x + 1) xs
