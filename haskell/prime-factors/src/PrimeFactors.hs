@@ -1,7 +1,5 @@
 module PrimeFactors (primeFactors) where
 
-import Data.List (nub)
-
 primeFactors :: Integer -> [Integer]
 primeFactors n
     | n < 2 = []
