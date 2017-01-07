@@ -4,7 +4,6 @@ import Data.List (any)
 
 rebase :: Integral a => a -> a -> [a] -> Maybe [a]
 rebase inputBase outputBase inputDigits
-    | inputBase < 2 || outputBase < 2 = Nothing
     | isInvalid = Nothing
     | inputDigits == [] || inputDigits == [0] = Just []
     | otherwise = Just $ rebase' n outputBase []
@@ -12,6 +11,8 @@ rebase inputBase outputBase inputDigits
     	n = calc inputDigits inputBase 0
     	isInvalid  = any (< 0) inputDigits 
     	          || any (>= inputBase) inputDigits
+    	          || inputBase < 2
+    	          || outputBase < 2
 
 rebase' :: Integral a => a -> a -> [a] -> [a]
 rebase' n base acc
