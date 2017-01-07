@@ -17,7 +17,6 @@ rebase inputBase outputBase inputDigits
 rebase' :: Integral a => a -> a -> [a] -> [a]
 rebase' n base acc
     | n == 0 = acc
-    | n < base = n:acc
     | otherwise = rebase' d base (m:acc)
     where (d, m) = divMod n base
 
