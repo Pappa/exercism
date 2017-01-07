@@ -1,7 +1,6 @@
 module Series (largestProduct) where
 
 import Data.Char (digitToInt, isDigit)
-import qualified Data.List as L (product)
 
 largestProduct :: Int -> String -> Maybe Int
 largestProduct 0 _ = Just 1
@@ -20,4 +19,4 @@ largestProduct' span str@(x:xs) pr
     	l = if p > pr then p else pr
 
 prod :: String -> Int
-prod str = L.product $ map digitToInt str
+prod str = product $ map digitToInt str
