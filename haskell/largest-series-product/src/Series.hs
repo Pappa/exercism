@@ -12,5 +12,4 @@ largestProduct span str
     | otherwise = do
     	xs <- largestProduct span $ tail str
     	Just $ max (prod $ take span str) xs
-    	where
-    		prod str = product $ map digitToInt str
+    	where prod str = product $ map digitToInt str
