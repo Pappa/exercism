@@ -8,15 +8,10 @@ largestProduct span str
     | span < 2 = Nothing
     | length str < span = Nothing
     | not $ all isDigit str = Nothing
-    | otherwise = Just $ largestProduct' span str 0
-
-largestProduct' :: Int -> String -> Int -> Int
-largestProduct' span str@(x:xs) pr
-    | length str == span = l
-    | otherwise = largestProduct' span xs l
-    where
-    	p = prod $ take span str
-    	l = if p > pr then p else pr
+    | length str == span = Just $ prod str
+    | otherwise = do
+    	xs <- largestProduct span $ tail str
+    	Just $ max (prod $ take span str) xs
 
 prod :: String -> Int
 prod str = product $ map digitToInt str
