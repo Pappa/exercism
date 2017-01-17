@@ -9,6 +9,8 @@ data Schedule = First | Second | Third | Fourth | Last | Teenth
 data Weekday = Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
              deriving (Enum, Eq)
 
+weekLength = length [Monday .. Sunday]
+
 type Year = Integer
 type Month = Int
 
@@ -21,19 +23,9 @@ meetupDay schedule weekday year month = addDays totalOffset monthStartDay
             Second -> 7
             Third -> 14
             Fourth -> 21
-            Last -> (gregorianMonthLength year month) - 7
+            Last -> (gregorianMonthLength year month) - weekLength
             Teenth -> 12
         weekStartDay = addDays (toInteger weekStartOffset) monthStartDay
         (_, _, dayNumber) = toWeekDate weekStartDay
-        weekStartDayName = toEnum (dayNumber - 1) :: Weekday
-        weekdayOffset = getDayOffset weekday weekStartDayName 0
+        weekdayOffset = ((fromEnum weekday) - (dayNumber - 1) + weekLength) `mod` weekLength
         totalOffset = toInteger (weekStartOffset + weekdayOffset)
-
-getDayOffset :: Weekday -> Weekday -> Int -> Int
-getDayOffset targetDay startDay i
-    | targetDay == startDay = i
-    | otherwise = getDayOffset targetDay (nextDay startDay) (i + 1)
-
-nextDay :: Weekday -> Weekday
-nextDay Sunday = Monday
-nextDay b = succ b
