@@ -11,5 +11,7 @@ isPythagorean (a, b, c)
 
 mkTriplet a b c = (a, b, c)
 
-pythagoreanTriplets x y = sortBy (compare `on` f) $ [(a,b,c) | c <- [x..y], b <- [x..c], a <- [x..b], a^2 + b^2 == c^2]
-    where f (x, _, _) = x
+pythagoreanTriplets x y = sortOnFirst $ [(a,b,c) | c <- [x..y], b <- [x..c], a <- [x..b], a^2 + b^2 == c^2]
+    where
+        f (x, _, _) = x
+        sortOnFirst = sortBy (compare `on` f)
