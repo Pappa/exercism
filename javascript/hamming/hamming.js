@@ -1,15 +1,15 @@
-//
-// This is a stub file for the 'Hello World' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-// Make sure to look at hello-world.spec.js--that should give you some hints about what is
-// expected here.
-
 var Hamming = function() {};
 
 Hamming.prototype.compute = function(strand1, strand2) {
     if (strand1.length !== strand2.length) {
-        return 0;
+    	throw new Error('DNA strands must be of equal length.');
+    	return;
     }
+	var n1 = strand1.split('');
+	var n2 = strand2.split('');
+	return n1.reduce((acc, n, index) => {
+		return (n === n2[index]) ? acc : acc + 1;
+	}, 0);
 };
 
 module.exports = Hamming;
