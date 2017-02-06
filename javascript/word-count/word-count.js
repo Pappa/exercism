@@ -7,9 +7,9 @@ Words.prototype.count = (str) => {
 		.map(stripQuotes)
 		.filter(w => w !== '')
 		.reduce((acc, word) => {
-			acc[word] = acc[word] + 1 || 1;
+			acc[word] = (acc.hasOwnProperty(word)) ? acc[word] + 1 : 1;
 			return acc;
-		}, Object.create(null));
+		}, {});
 };
 
 var stripQuotes = function(word) {
