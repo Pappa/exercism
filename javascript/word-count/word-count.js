@@ -7,7 +7,7 @@ Words.prototype.count = (str) => {
 		.map(stripQuotes)
 		.filter(w => w !== '');
 	return words.reduce((acc, word) => {
-		acc[word] = acc[word] ? acc[word] + 1 : 1;
+		acc[word] = acc[word] + 1 || 1;
 		return acc;
 	}, Object.create(null));
 };
