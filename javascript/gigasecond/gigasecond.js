@@ -1,6 +1,6 @@
 function Gigasecond(date) {
     this.d = date;
-    this.gigasecond = 1000000000000;
+    this.gigasecond = 1e12;
 }
 
 Gigasecond.prototype.date = function() {
