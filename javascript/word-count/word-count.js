@@ -1,15 +1,15 @@
 function Words() {};
 
 Words.prototype.count = (str) => {
-	var words = str.toLowerCase()
+	return str.toLowerCase()
 		.replace(/[¡!&@$%^&:.?¿]+/g, '')
 		.split(/[\s,]+/)
 		.map(stripQuotes)
-		.filter(w => w !== '');
-	return words.reduce((acc, word) => {
-		acc[word] = acc[word] + 1 || 1;
-		return acc;
-	}, Object.create(null));
+		.filter(w => w !== '')
+		.reduce((acc, word) => {
+			acc[word] = acc[word] + 1 || 1;
+			return acc;
+		}, Object.create(null));
 };
 
 var stripQuotes = function(word) {
