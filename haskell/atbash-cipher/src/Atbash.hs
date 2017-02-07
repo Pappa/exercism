@@ -11,9 +11,8 @@ chars = alphabet ++ numbers
 atbash = M.fromList $ zip chars $ (reverse alphabet) ++ numbers
 
 decode :: String -> String
-decode input = converted
+decode input = catMaybes $ map (`M.lookup` atbash) filtered
   where
-    converted = catMaybes $ map (`M.lookup` atbash) filtered
     filtered = filter (`elem` chars) $ map toLower input
 
 encode :: String -> String
