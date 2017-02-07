@@ -5,10 +5,10 @@ import qualified Data.Map as M (Map, fromList, lookup)
 import Data.Maybe (catMaybes)
 import Data.List.Split (chunksOf)
 
-alphabet = ['a'..'z']
+letters = ['a'..'z']
 numbers = ['0'..'9']
-chars = alphabet ++ numbers
-atbash = M.fromList $ zip chars $ (reverse alphabet) ++ numbers
+chars = letters ++ numbers
+atbash = M.fromList $ zip chars $ (reverse letters) ++ numbers
 
 decode :: String -> String
 decode input = catMaybes $ map (`M.lookup` atbash) filtered
