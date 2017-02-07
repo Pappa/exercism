@@ -7,17 +7,14 @@ import Data.List.Split (chunksOf)
 
 alphabet = ['a'..'z']
 numbers = ['0'..'9']
-alphaNumeric = alphabet ++ numbers
-atbashMap = M.fromList $ zip alphaNumeric $ (reverse alphabet) ++ numbers
+chars = alphabet ++ numbers
+atbash = M.fromList $ zip chars $ (reverse alphabet) ++ numbers
 
 decode :: String -> String
-decode input = convert input
+decode input = converted
+  where
+    converted = catMaybes $ map (`M.lookup` atbash) filtered
+    filtered = filter (`elem` chars) $ map toLower input
 
 encode :: String -> String
-encode input = unwords $ chunksOf 5 $ convert input
-
-convert :: String -> String
-convert input = converted
-    where
-        converted = catMaybes $ map (`M.lookup` atbashMap) filtered
-        filtered = filter (`elem` alphaNumeric) $ map toLower input
+encode input = unwords $ chunksOf 5 $ decode input
