@@ -9,7 +9,14 @@ chars = ['a'..'z']
 encode :: String -> String
 encode input = unwords $ transpose chunked
   where
-    size = 2
     filtered = filter (`elem` chars) $ map toLower input
-    chunked = chunksOf size filtered
+    chunked = chunksOf (size filtered 1) filtered
+
+size :: String -> Int -> Int
+size str n
+    | n * n == l = n
+    | n * n < l && n * (n + 1) > l = n
+    | otherwise = size str (n + 1)
+    where
+        l = length str
 
