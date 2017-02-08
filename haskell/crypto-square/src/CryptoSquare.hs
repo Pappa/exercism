@@ -1,10 +1,8 @@
 module CryptoSquare (encode) where
 
-import Data.Char (toLower)
+import Data.Char (toLower, isAlphaNum)
 import Data.List (transpose)
 import Data.List.Split (chunksOf)
-
-chars = ['a'..'z'] ++ ['0'..'9']
 
 encode :: String -> String
 encode input = unwords $ map strip reordered 
@@ -28,4 +26,4 @@ rPad n str
     | otherwise = rPad n (str ++ " ")
 
 strip :: String -> String
-strip = filter (`elem` chars)
+strip = filter isAlphaNum
