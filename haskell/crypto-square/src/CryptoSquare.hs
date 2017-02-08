@@ -4,19 +4,28 @@ import Data.Char (toLower)
 import Data.List (transpose)
 import Data.List.Split (chunksOf)
 
-chars = ['a'..'z']
+chars = ['a'..'z'] ++ ['0'..'9']
 
 encode :: String -> String
-encode input = unwords $ transpose chunked
+encode input = unwords $ map strip reordered 
   where
-    filtered = filter (`elem` chars) $ map toLower input
-    chunked = chunksOf (size filtered 1) filtered
+    filtered = strip $ map toLower input
+    size = getSize 1 filtered 
+    chunked = chunksOf size filtered
+    reordered = transpose $ map (rPad size) chunked
 
-size :: String -> Int -> Int
-size str n
-    | n * n == l = n
-    | n * n < l && n * (n + 1) > l = n
-    | otherwise = size str (n + 1)
+getSize :: Int -> String -> Int
+getSize n str
+    | n^2 == l = n
+    | n^2 > l && l < n * (n + 1) = n
+    | otherwise = getSize (n + 1) str
     where
         l = length str
 
+rPad :: Int -> String -> String
+rPad n str
+    | length str == n = str
+    | otherwise = rPad n (str ++ " ")
+
+strip :: String -> String
+strip = filter (`elem` chars)
