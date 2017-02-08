@@ -5,12 +5,12 @@ import Data.List (transpose)
 import Data.List.Split (chunksOf)
 
 encode :: String -> String
-encode input = unwords $ map strip reordered 
+encode input = unwords $ map (filter isAlphaNum) reordered 
   where
-    filtered = strip $ map toLower input
-    size = getSize 1 filtered 
+    filtered = filter isAlphaNum $ map toLower input
     chunked = chunksOf size filtered
     reordered = transpose $ map (rPad size) chunked
+    size = getSize 1 filtered 
 
 getSize :: Int -> String -> Int
 getSize n str
@@ -24,6 +24,3 @@ rPad :: Int -> String -> String
 rPad n str
     | length str == n = str
     | otherwise = rPad n (str ++ " ")
-
-strip :: String -> String
-strip = filter isAlphaNum
