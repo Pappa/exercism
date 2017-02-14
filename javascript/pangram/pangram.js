@@ -1,6 +1,6 @@
 function Pangram(word) {
     this.letters = word
-        .replace(/[ßäöü0-9". _-]+/g, '')
+        .replace(/[^a-z]/gi, '')
         .toLowerCase()
         .split('')
         .sort()
