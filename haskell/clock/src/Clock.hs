@@ -15,7 +15,7 @@ instance Num Clock where
     fromInteger = fromHourMin 0
     (+) (Clock c1) (Clock c2) = fromInteger $ c1 + c2
     (*) (Clock c1) (Clock c2) = fromInteger $ c1 * c2
-    abs (Clock c) = fromInteger c
+    abs = id
     signum _ = 1
 
 clockHour :: Clock -> Integer
