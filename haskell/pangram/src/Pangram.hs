@@ -4,8 +4,6 @@ import Data.Char (isAlpha, toLower)
 import Data.List (sort, group)
 
 isPangram :: String -> Bool
-isPangram text
-    | length letters >= 26 = True
-    | otherwise = False
+isPangram text = count >= 26
     where
-        letters = group $ sort $ filter isAlpha $ map toLower text
+        count = length $ group $ sort $ filter isAlpha $ map toLower text
