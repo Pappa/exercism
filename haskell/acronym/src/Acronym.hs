@@ -14,5 +14,7 @@ abbreviate' xxs@(x:xs) acc word
     | isWordBoundary = abbreviate' xxs (acc ++ [word]) ""
     | otherwise = abbreviate' xs acc (word ++ [x])
     where
-    	isNotAlpha = not $ isAlpha x
-        isWordBoundary = (length word > 0) && (isUpper x) && (isLower $ last word)
+        isNotAlpha = not $ isAlpha x
+        isWordBoundary = (length word > 0) 
+            && (isUpper x) 
+            && (isLower $ last word)
