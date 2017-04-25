@@ -8,13 +8,16 @@ abbreviate xs = abbreviate' xs [] ""
 
 abbreviate' :: String -> [String] -> String -> String
 abbreviate' [] acc word = map toUpper $ map head (acc ++ [word]) 
-abbreviate' xxs@(x:xs) acc word
-    | isNotAlpha && length word == 0 = abbreviate' xs acc ""
-    | isNotAlpha = abbreviate' xs (acc ++ [word]) ""
-    | isWordBoundary = abbreviate' xxs (acc ++ [word]) ""
-    | otherwise = abbreviate' xs acc (word ++ [x])
+abbreviate' xxs@(x:xs) acc word = abbreviate' str words current
     where
-        isNotAlpha = not $ isAlpha x
-        isWordBoundary = (length word > 0) 
+        isBoundary = (length word > 0) 
             && (isUpper x) 
             && (isLower $ last word)
+        current = if not isBoundary && isAlpha x
+            then word ++ [x]
+            else ""
+        words = if not isBoundary 
+                && (isAlpha x || length word == 0)
+            then acc
+            else acc ++ [word]
+        str = if isBoundary then xxs else xs
