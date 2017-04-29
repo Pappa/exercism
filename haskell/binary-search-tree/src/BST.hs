@@ -29,7 +29,7 @@ bstValue Empty = Nothing
 bstValue (Node v _ _) = Just v
 
 empty :: BST a
-empty = error "You need to implement this function."
+empty = Empty
 
 fromList :: Ord a => [a] -> BST a
 fromList xs = Node a (fromList l) (fromList r)
@@ -37,7 +37,11 @@ fromList xs = Node a (fromList l) (fromList r)
         (l, a:r) = splitAt (length xs `div` 2) xs
 
 insert :: Ord a => a -> BST a -> BST a
-insert x tree = error "You need to implement this function."
+insert x Empty = singleton x
+insert x tree@(Node a l r)
+    | x < a = (Node x (insert x l) r)
+    | x > a = (Node x l (insert x r))
+    | otherwise = tree
 
 singleton :: a -> BST a
 singleton x = (Node x Empty Empty)
