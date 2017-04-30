@@ -33,7 +33,7 @@ empty = Empty
 
 fromList :: Ord a => [a] -> BST a
 fromList [] = empty
-fromList (x:xs) = foldl (flip insert) (singleton x) xs
+fromList xs = foldl (flip insert) Empty xs
 
 insert :: Ord a => a -> BST a -> BST a
 insert x Empty = singleton x
