@@ -32,9 +32,8 @@ empty :: BST a
 empty = Empty
 
 fromList :: Ord a => [a] -> BST a
-fromList xs = Node a (fromList l) (fromList r)
-    where
-        (l, a:r) = splitAt (length xs `div` 2) xs
+fromList [] = empty
+fromList (x:xs) = foldl (flip insert) (singleton x) xs
 
 insert :: Ord a => a -> BST a -> BST a
 insert x Empty = singleton x
