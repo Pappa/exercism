@@ -39,9 +39,10 @@ fromList xs = Node a (fromList l) (fromList r)
 insert :: Ord a => a -> BST a -> BST a
 insert x Empty = singleton x
 insert x tree@(Node a l r)
-    | x > a     = Node a l (insert x r)
-    | x < a     = Node a (insert x l) r
-    | otherwise = tree
+    | x > a = (Node a l (insert x r))
+    | x < a = (Node a (insert x l) r)
+    | otherwise = (Node a (insert x l) r)
+--    | otherwise = tree
 
 singleton :: a -> BST a
 singleton x = (Node x Empty Empty)
