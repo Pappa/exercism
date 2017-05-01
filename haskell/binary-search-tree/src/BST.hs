@@ -12,16 +12,13 @@ module BST
 
 data BST a = Empty
              | Node a (BST a) (BST a)
-             deriving (Eq, Show) 
+             deriving (Eq, Show)
 
 bstLeft :: BST a -> Maybe (BST a)
-bstLeft Empty = Nothing
-bstLeft (Node _ Empty _) = Nothing
 bstLeft (Node _ l _) = Just l
 
+
 bstRight :: BST a -> Maybe (BST a)
-bstRight Empty = Nothing
-bstRight (Node _ Empty _) = Nothing
 bstRight (Node _ _ r) = Just r
 
 bstValue :: BST a -> Maybe a
@@ -32,7 +29,7 @@ empty :: BST a
 empty = Empty
 
 fromList :: Ord a => [a] -> BST a
-fromList = foldl (flip insert) Empty
+fromList = foldr insert Empty
 
 insert :: Ord a => a -> BST a -> BST a
 insert x Empty = singleton x
