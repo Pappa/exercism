@@ -34,7 +34,9 @@ checksum :: Integer -> Integer
 checksum = (`mod` 10) . foldl (+) 0 . addends
 
 create :: Integer -> Integer
-create n = error "You need to implement this function."
+create n = m + ((foldl (+) 0 $ addends m) `mod` 10)
+    where
+        m = (n * 10)
 
 isValid :: Integer -> Bool
 isValid n = ((checksum n) `mod` 10) == 0
