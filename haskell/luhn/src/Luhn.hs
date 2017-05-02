@@ -5,8 +5,10 @@ module Luhn (addends, checkDigit, checksum, create, isValid) where
 addends :: Integer -> [Integer]
 addends n = reverse $ join (o, evens) []
     where
-        (o, e) = split (reverse (digs n)) [] []
+        (o, e) = split (reverse (digits n)) [] []
         evens = map modify e
+        digits 0 = []
+        digits x = digits (x `div` 10) ++ [x `mod` 10]
 
 modify :: Integer -> Integer
 modify n
@@ -14,10 +16,6 @@ modify n
     | otherwise = x
     where
         x = n * 2
-
-digs :: Integral x => x -> [x]
-digs 0 = []
-digs x = digs (x `div` 10) ++ [x `mod` 10]
 
 join :: ([t], [t]) -> [t] -> [t]
 join ([], []) acc = acc
@@ -33,10 +31,10 @@ checkDigit :: Integer -> Integer
 checkDigit = (`mod` 10)
 
 checksum :: Integer -> Integer
-checksum n = error "You need to implement this function."
+checksum = (`mod` 10) . foldl (+) 0 . addends
 
 create :: Integer -> Integer
 create n = error "You need to implement this function."
 
 isValid :: Integer -> Bool
-isValid n = error "You need to implement this function."
+isValid n = ((checksum n) `mod` 10) == 0
