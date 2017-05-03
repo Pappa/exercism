@@ -34,9 +34,11 @@ checksum :: Integer -> Integer
 checksum = (`mod` 10) . foldl (+) 0 . addends
 
 create :: Integer -> Integer
-create n = m + ((foldl (+) 0 $ addends m) `mod` 10)
+create n = m + c
     where
         m = (n * 10)
+        s = ((foldl (+) 0 $ addends m) `mod` 10)
+        c = (s * 9) `mod` 10
 
 isValid :: Integer -> Bool
 isValid n = ((checksum n) `mod` 10) == 0
