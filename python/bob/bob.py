@@ -6,13 +6,12 @@ answers = {
 }
 
 def hey(input):
-    letters = ''.join([c if c.isalnum() else '' for c in input])
     trimmed = input.strip()
-    if len(letters) > 0 and letters.isupper():
+    if trimmed.isupper():
     	return answers['yell']
-    elif len(trimmed) == 0:
-    	return answers['nada']
-    elif trimmed[-1] == '?':
+    elif trimmed.endswith('?'):
     	return answers['question']
+    elif not trimmed:
+    	return answers['nada']
     else:
     	return answers['whatever']
