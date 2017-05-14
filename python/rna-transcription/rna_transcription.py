@@ -4,8 +4,7 @@ nucleotideMap = {
 	"T": "A",
 	"A": "U" }
 
-def to_rna(input):
-    nucleotides = list(input)
+def to_rna(nucleotides):
     rnaLetters = []
 
     for n in nucleotides:
