@@ -1,5 +1,4 @@
 import string
-from re import sub
 
 lower = string.ascii_lowercase
 upper = string.ascii_uppercase
