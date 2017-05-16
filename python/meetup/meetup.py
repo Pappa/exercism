@@ -6,27 +6,18 @@ class MeetupDayException(BaseException):
 
 def meetup_day(year, month, day, week):
 	month_start = date(year, month, 1)
+	first_day_with_name = __get_first_day_with_name(month_start, day)
 	if week == 'teenth':
 		week_start = date(year, month, 13)
 		return __get_first_day_with_name(week_start, day)
+	elif week == 'last':
+		return __get_last_day_with_name(year, month, day)
 	else:
-		first_day_with_name = __get_first_day_with_name(month_start, day)
-		if week == '1st':
-			return first_day_with_name
-		elif week == '2nd':
-			return first_day_with_name + timedelta(days=7)
-		elif week == '3rd':
-			return first_day_with_name + timedelta(days=14)
-		elif week == '4th':
-			return first_day_with_name + timedelta(days=21)
-		elif week == '5th':
-			new_date = first_day_with_name + timedelta(days=28)
-			if new_date.month == month:
-				return new_date
-			else:
-				raise MeetupDayException
-		elif week == 'last':
-			return __get_last_day_with_name(year, month, day)
+		new_date = first_day_with_name + timedelta(days=delta_map[week])
+		if new_date.month == month:
+			return new_date
+		else:
+			raise MeetupDayException
 
 def __get_first_day_with_name(start, day):
 	day_number = day_map[day]
@@ -43,6 +34,13 @@ def __get_last_day_with_name(year, month, day):
 	offset = (last_day_number - day_number + 7) % 7
 	return last_day - timedelta(days=offset)
 
+delta_map = {
+	'1st': 0,
+	'2nd': 7,
+	'3rd': 14,
+	'4th': 21,
+	'5th': 28
+}
 
 day_map = {
 	'Monday': 0,
