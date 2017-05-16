@@ -9,7 +9,7 @@ def sum_of_squares(num):
 def difference(num):
 	a = square_of_sum(num)
 	b = sum_of_squares(num)
-	return abs(a - b)
+	return a - b
 
 def __square(x):
 	return x ** 2
