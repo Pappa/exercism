@@ -3,5 +3,4 @@ import operator
 def sum_of_multiples(limit, nums):
     multiples = map(lambda n: range(n, limit, n), nums)
     multiples = reduce(operator.add, multiples, [])
-    multiples = list(set(multiples))
-    return sum(multiples)
+    return sum(set(multiples))
