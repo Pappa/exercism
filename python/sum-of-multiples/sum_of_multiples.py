@@ -1,6 +1,5 @@
 import operator
 
 def sum_of_multiples(limit, nums):
-    multiples = map(lambda n: range(n, limit, n), nums)
-    multiples = reduce(operator.add, multiples, [])
+    multiples = [x for n in nums for x in range(n, limit, n)]
     return sum(set(multiples))
