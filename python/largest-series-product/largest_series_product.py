@@ -1,20 +1,14 @@
 def largest_product(series, span):
 	if span > len(series) or span < 0:
-		raise ValueError
+		raise ValueError("Invalid span")
+	if not span:
+		return 1
 
 	ints = [int(c) for c in series]
-	products = []
+	l = len(ints)
+	products = [ints[idx:span+idx] for idx in range(0, l) if l - idx >= span]
 
-	for idx in range(0, len(ints)):
-		if len(ints) - idx >= span:
-			products.append(ints[idx:span+idx])
+	return max(map(_prod, products))
 
-	products = map(lambda l: reduce(_prod, l, 1), products)
-
-	if (len(products)) > 0:
-		return max(products)
-	return 1
-
-
-def _prod(x, y):
-	return x * y
+def _prod(l):
+	return reduce(lambda x, y: x * y, l, 1)
