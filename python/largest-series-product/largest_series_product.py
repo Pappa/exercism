@@ -1,3 +1,5 @@
+from operator import mul
+
 def largest_product(series, span):
 	if span > len(series) or span < 0:
 		raise ValueError("Invalid span")
@@ -11,4 +13,4 @@ def largest_product(series, span):
 	return max(map(_prod, products))
 
 def _prod(l):
-	return reduce(lambda x, y: x * y, l, 1)
+	return reduce(mul, l, 1)
