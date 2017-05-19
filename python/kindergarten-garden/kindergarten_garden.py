@@ -1,10 +1,5 @@
 default_students = ["Alice", "Bob", "Charlie", "David", "Eve", "Fred", "Ginny", "Harriet", "Ileana", "Joseph", "Kincaid", "Larry"]
-plants = {
-	'C': 'Clover',
-	'G': 'Grass',
-	'R': 'Radishes',
-	'V': 'Violets'
-}
+plants = { x[0]: x for x in 'Grass Clover Radishes Violets'.split() }
 
 class Garden(object):
     def __init__(self, garden, students=default_students):
