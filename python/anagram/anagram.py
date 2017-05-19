@@ -1,11 +1,11 @@
 def detect_anagrams(txt, candidates):
-    return [c for c in candidates if __is_anagram(c, txt)]
+    return [c for c in candidates if _is_anagram(c, txt)]
 
-def __is_anagram(a, b):
+def _is_anagram(a, b):
     return (
         a.lower() != b.lower() and
-        __sort(a) == __sort(b)
+        _sort(a) == _sort(b)
     )
 
-def __sort(txt):
+def _sort(txt):
     return ''.join(sorted(txt.lower()))
