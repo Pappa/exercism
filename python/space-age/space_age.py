@@ -11,33 +11,15 @@ class SpaceAge(object):
             'on_uranus': 84.016846,
             'on_neptune': 164.79132
         };
+        for planet in self._multipliers.keys():
+            self.__add_method(planet)
+
+    def __add_method(self, planet):
+        setattr(self.__class__, planet,
+        	lambda self: self._get_age(planet))
 
     def _period(self, planet):
     	return 31557600 * self._multipliers[planet]
 
     def _get_age(self, planet):
     	return float(format(self.seconds / self._period(planet), '.2f'))
-
-    def on_mercury(self):
-        return self._get_age('on_mercury')
-
-    def on_venus(self):
-        return self._get_age('on_venus')
-
-    def on_earth(self):
-        return self._get_age('on_earth')
-
-    def on_mars(self):
-        return self._get_age('on_mars')
-
-    def on_jupiter(self):
-        return self._get_age('on_jupiter')
-
-    def on_saturn(self):
-        return self._get_age('on_saturn')
-
-    def on_uranus(self):
-        return self._get_age('on_uranus')
-
-    def on_neptune(self):
-        return self._get_age('on_neptune')
