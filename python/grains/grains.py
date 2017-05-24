@@ -1,20 +1,11 @@
-_SQUARES = [1]
-
-for x in range(0, 64):
-	_SQUARES.append(_SQUARES[x] * 2)
-
 def on_square(square):
-    if not _is_square_valid(square):
-    	raise ValueError
-    else:
-    	return _SQUARES[square - 1]
-
+    _raise_if_invalid(square)
+    return 2 ** (square - 1)
 
 def total_after(square):
-    if not _is_square_valid(square):
-    	raise ValueError
-    else:
-    	return sum(_SQUARES[0:square])
+    _raise_if_invalid(square)
+    return sum([ 2 ** x for x in range(0, square) ])
 
-def _is_square_valid(square):
-	return square in range(1, 65)
+def _raise_if_invalid(square):
+	if not square in range(1, 65):
+		raise ValueError('Square out of range')
