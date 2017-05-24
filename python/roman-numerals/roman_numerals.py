@@ -20,4 +20,4 @@ def numeral(arabic):
 	return acc
 
 def _is_exception(arabic):
-	return next((low for low, high, _ in exceptions if arabic in range(low, high + 1)), False)
+	return next((True for low, high, _ in exceptions if arabic in range(low, high + 1)), False)
