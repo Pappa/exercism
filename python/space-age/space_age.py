@@ -16,10 +16,10 @@ class SpaceAge(object):
 
     def __add_method(self, planet):
         setattr(self.__class__, planet,
-        	lambda self: self._get_age(planet))
+        	lambda self: self.__get_age(planet))
 
-    def _period(self, planet):
+    def __period(self, planet):
     	return 31557600 * self._multipliers[planet]
 
-    def _get_age(self, planet):
-    	return float(format(self.seconds / self._period(planet), '.2f'))
+    def __get_age(self, planet):
+    	return float(format(self.seconds / self.__period(planet), '.2f'))
