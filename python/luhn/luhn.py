@@ -5,8 +5,7 @@ class Luhn(object):
         self._valid = False
         if self._is_invalid_string(text):
             return
-        if self._checksum(text) == 0:
-            self._valid = True
+        self._valid = self._checksum(text) == 0
 
     def is_valid(self):
         return self._valid
