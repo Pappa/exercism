@@ -5,4 +5,4 @@ def slices(series, span):
     else:
         out = []
         ints = [int(i) for i in series]
-        return [ints[idx:span+idx] for idx in range(length + 1 - span)]
+        return [ints[i:span+i] for i in range(length + 1 - span)]
