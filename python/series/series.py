@@ -1,10 +1,8 @@
-def slices(series, length):
-    if len(series) < length or length == 0:
-    	raise ValueError
+def slices(series, span):
+    length = len(series)
+    if length < span or span == 0:
+        raise ValueError
     else:
-    	out = []
-    	ints = [int(i) for i in series]
-    	for idx in range(0, len(ints)):
-    		if len(ints) - idx >= length:
-    			out.append(ints[idx:length+idx])
-    	return out
+        out = []
+        ints = [int(i) for i in series]
+        return [ints[idx:span+idx] for idx in range(length + 1 - span)]
