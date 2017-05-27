@@ -2,10 +2,9 @@ def numeral(arabic):
     acc = ''
     while arabic:
         for n, symbol in numerals:
-            dup, _ = ((1, None), divmod(arabic, n))[len(symbol) > 1]
             if n <= arabic:
-                acc += symbol * dup
-                arabic -= n * dup
+                acc += symbol
+                arabic -= n
                 break
     return acc
 
