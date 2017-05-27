@@ -6,7 +6,7 @@ def on_square(square):
 
 def total_after(square):
     _raise_if_invalid(square)
-    return sum(squares[0:square])
+    return sum(squares[:square])
 
 def _raise_if_invalid(square):
     if not square in range(1, 65):
