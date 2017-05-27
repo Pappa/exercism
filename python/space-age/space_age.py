@@ -13,16 +13,15 @@ MULTIPLIERS = {
 }
 
 class SpaceAge(object):
-
     def __init__(self, age):
         self.seconds = age
         for planet in MULTIPLIERS:
-            setattr(self, planet, partial(self.__get_age, planet))
+            setattr(self, planet, partial(self.__age, planet))
 
     @staticmethod
     def __period(planet):
         return EARTH_YEAR_IN_SECONDS * MULTIPLIERS[planet]
 
-    def __get_age(self, planet):
+    def __age(self, planet):
         age = self.seconds / self.__period(planet)
         return round(age, 2)
