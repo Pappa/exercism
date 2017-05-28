@@ -9,4 +9,4 @@ scores = { c: i for chars, i in [
 ] for c in chars }
 
 def score(chars):
-    return sum([scores[c.upper()] for c in chars])
+    return sum([scores[c] for c in chars.upper()])
