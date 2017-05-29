@@ -13,4 +13,4 @@ def check_lists(first, second):
     return UNEQUAL
 
 def _contains(needle, haystack):
-	return '#'.join([str(i) for i in needle]) in '#'.join([str(i) for i in haystack])
+	return '#'.join(map(str, needle)) in '#'.join(map(str, haystack))
