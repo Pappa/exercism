@@ -8,9 +8,9 @@ def largest_product(series, span):
 
 	ints = [int(c) for c in series]
 	l = len(ints)
-	products = [ints[idx:span+idx] for idx in range(0, l) if l - idx >= span]
+	products = [ints[idx:span+idx] for idx in range(l) if l - idx >= span]
 
 	return max(map(_prod, products))
 
-def _prod(l):
-	return reduce(mul, l, 1)
+def _prod(x):
+	return reduce(mul, x, 1)
