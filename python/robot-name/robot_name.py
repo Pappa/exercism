@@ -1,5 +1,5 @@
-from random import choice, randint, seed
-from string import ascii_uppercase as uppercase
+from random import sample, seed
+from string import ascii_uppercase as uppercase, digits
 
 class Robot(object):
     def __init__(self):
@@ -10,6 +10,6 @@ class Robot(object):
         self._generate_name()
 
     def _generate_name(self):
-        letters = ''.join(choice(uppercase) for _ in range(2))
-        numbers = ''.join([str(randint(0, 9)) for _ in range(3)])
+        letters = ''.join(sample(uppercase, 2))
+        numbers = ''.join(sample(digits, 3))
         self.name = letters + numbers
