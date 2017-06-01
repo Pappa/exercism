@@ -11,7 +11,9 @@ class Robot:
 		self._actions = {
 			'A': self.advance,
 			'L': self.turn_left,
-			'R': self.turn_right,
+			'R': self.turn_right
+		}
+		self._directions = {
 			NORTH: lambda (x, y): (x, y+1),
 			EAST: lambda (x, y): (x+1, y),
 			SOUTH: lambda (x, y): (x, y-1),
@@ -20,7 +22,7 @@ class Robot:
 		self._bearings = [ NORTH, EAST, SOUTH, WEST ]
 
 	def advance(self):
-		self.coordinates = self._actions[self.bearing](self.coordinates)
+		self.coordinates = self._directions[self.bearing](self.coordinates)
 
 	def turn_right(self):
 		idx = self._bearings.index(self.bearing)
