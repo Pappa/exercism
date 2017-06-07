@@ -22,6 +22,10 @@ class RailFenceTests(unittest.TestCase):
         self.assertMultiLineEqual(
             decode('TEITELHDVLSNHDTISEIIEA', 3), 'THEDEVILISINTHEDETAILS')
 
+    def test_decode_with_three_rails2(self):
+        self.assertMultiLineEqual(
+            decode('WECRLTEERDSOEEFEAOCAIVDEN', 3), 'WEAREDISCOVEREDFLEEATONCE')
+
     def test_decode_with_five_rails(self):
         self.assertMultiLineEqual(
             decode('EIEXMSMESAORIWSCE', 5), 'EXERCISMISAWESOME')

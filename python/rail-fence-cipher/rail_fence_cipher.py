@@ -18,4 +18,9 @@ def encode(l, rails):
 
 def decode(l, rails):
     fence = fence_pattern(l, rails)
-    pass
+    letters = list(l)
+    for i in range(rails):
+        for idx, item in enumerate(fence):
+            if item == i:
+                fence[idx] = letters.pop(0)
+    return ''.join(fence)
