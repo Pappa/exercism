@@ -8,4 +8,4 @@ def _is_anagram(a, b):
     )
 
 def _sort(txt):
-    return ''.join(sorted(txt.lower()))
+    return sorted(txt.lower())
