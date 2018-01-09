@@ -17,28 +17,20 @@ class LinkedList {
 
     push(data) {
         let node = new Node(data);
-        this._current = this._head;
+        this._current = this._end;
         if (!this._current) {
             this._head = node;
             this._end = this._head;
-            this._count++;
-            return;
+        } else {
+            this._current.next = node;
+            this._end = this._current.next;
+            this._end.prev = this._current;
         }
-        while (this._current.next) {
-            this._current = this._current.next;
-        }
-        this._current.next = node;
-        this._end = this._current.next;
-        this._end.prev = this._current;
         this._count++;
     }
 
     pop() {
         let val = this._end.data;
-        this._current = this._head;
-        while (this._current.next) {
-            this._current = this._current.next;
-        }
         this._end = this._end.prev;
         this._count--;
         return val;
@@ -57,12 +49,12 @@ class LinkedList {
         if (!this._current) {
             this._head = node;
             this._end = this._head;
-            this._count++;
-            return;
+        } else {
+            this._head = node;
+            this._head.next = this._current;
+            this._current.prev = this._head;
         }
-        this._head = node;
-        this._head.next = this._current;
-        this._current.prev = this._head;
+        this._count++;
     }
 
     delete(data) {
