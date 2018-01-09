@@ -23,7 +23,7 @@ Object.keys(periods)
     .forEach(key => {
         SpaceAge.prototype['on' + key] = function() {
             let years = this.seconds / periods[key];
-            return Math.round(years * 100) / 100;
+            return Number.parseFloat(years.toFixed(2));
         };
 });
 
