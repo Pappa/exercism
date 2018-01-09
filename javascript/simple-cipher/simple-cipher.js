@@ -18,6 +18,7 @@ class Cipher {
     }
 
     encode(str) {
+        this.expandKey(str);
         return str.split('')
             .map((char, index) => {
                 let newIndex = alphabet.indexOf(char) + alphabet.indexOf(this.key[index]);
@@ -30,6 +31,7 @@ class Cipher {
     }
 
     decode(str) {
+        this.expandKey(str);
         return str.split('')
             .map((char, index) => {
                 let newIndex = alphabet.indexOf(char) - alphabet.indexOf(this.key[index]);
@@ -39,6 +41,12 @@ class Cipher {
                 return alphabet[newIndex];
             })
             .join('');
+    }
+
+    expandKey(str) {
+        while (this.key.length < str.length) {
+            this.key += this.key;
+        }
     }
 
     generateKey() {
