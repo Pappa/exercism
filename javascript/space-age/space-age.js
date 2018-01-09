@@ -1,14 +1,16 @@
+const EARTH_YEAR_IN_SEC = 31557600;
+
 const periods = {
-    'Mercury': 0.2408467,
-    'Venus': 0.61519726,
-    'Earth': 1.0,
-    'Venus': 0.61519726,
-    'Earth': 1.0,
-    'Mars': 1.8808158,
-    'Jupiter': 11.862615,
-    'Saturn': 29.447498,
-    'Uranus': 84.016846,
-    'Neptune': 164.79132
+    'Mercury': EARTH_YEAR_IN_SEC * 0.2408467,
+    'Venus': EARTH_YEAR_IN_SEC * 0.61519726,
+    'Earth': EARTH_YEAR_IN_SEC * 1.0,
+    'Venus': EARTH_YEAR_IN_SEC * 0.61519726,
+    'Earth': EARTH_YEAR_IN_SEC * 1.0,
+    'Mars': EARTH_YEAR_IN_SEC * 1.8808158,
+    'Jupiter': EARTH_YEAR_IN_SEC * 11.862615,
+    'Saturn': EARTH_YEAR_IN_SEC * 29.447498,
+    'Uranus': EARTH_YEAR_IN_SEC * 84.016846,
+    'Neptune': EARTH_YEAR_IN_SEC * 164.79132
 };
 
 class SpaceAge {
@@ -20,7 +22,7 @@ class SpaceAge {
 Object.keys(periods)
     .forEach(key => {
         SpaceAge.prototype['on' + key] = function() {
-            let years = this.seconds * periods[key] / 31557600;
+            let years = this.seconds / periods[key];
             return Math.round(years * 100) / 100;
         };
 });
