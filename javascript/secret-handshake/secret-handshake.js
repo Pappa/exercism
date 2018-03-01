@@ -1,3 +1,30 @@
+class Handshake {
+
+    constructor(n) {
+        if (!Number.isInteger(n)) {
+            throw new Error('Handshake must be a number');
+        }
+        this.output = makeCommands(n);
+    }
+
+    commands() {
+        return this.output;
+    }
+
+}
+
+function makeCommands(n) {
+    let commands = handshake
+        .filter(item => n & item.num)
+        .map(item => {
+            return item.text;
+        });
+    if (n & 0b10000) {
+        commands.reverse();
+    }
+    return commands;
+}
+
 const handshake = [
     {
         num: 0b1,
@@ -16,33 +43,5 @@ const handshake = [
         text: 'jump'
     }
 ];
-
-function makeCommands(n) {
-    let commands = handshake
-        .filter(item => n & item.num)
-        .map(item => {
-            return item.text;
-        });
-    if (n & 0b10000) {
-        commands.reverse();
-    }
-    return commands;
-
-}
-
-class Handshake {
-
-    constructor(n) {
-        if (!Number.isInteger(n)) {
-            throw new Error('Handshake must be a number');
-        }
-        this.output = makeCommands(n);
-    }
-
-    commands() {
-        return this.output;
-    }
-
-}
 
 module.exports = Handshake;
