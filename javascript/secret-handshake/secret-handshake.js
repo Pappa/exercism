@@ -16,9 +16,8 @@ class Handshake {
 function makeCommands(n) {
     let commands = handshake
         .filter(item => n & item.num)
-        .map(item => {
-            return item.text;
-        });
+        .map(item => item.text);
+    
     if (n & 0b10000) {
         commands.reverse();
     }
