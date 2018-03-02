@@ -1,15 +1,14 @@
-let names = [];
+let names = new Set();
 let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 let numbers = '0123456789';
 
 function makeName() {
     let robotName = getRandomString(letters, 2) + getRandomString(numbers, 3);
-    if (!names.includes(robotName)) {
-        names.push(robotName);
-        return robotName;
+    if (names.has(robotName)) {
+        return makeName();
     }
-    return makeName();
-
+    names.add(robotName);
+    return robotName;
 }
 
 function getRandomString(str, len) {
