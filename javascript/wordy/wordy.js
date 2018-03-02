@@ -27,8 +27,6 @@ module.exports = {
 };
 
 function parseProblem(problem) {
-    problem = problem.replace('What is ','').replace('?','');
-
     replacements.forEach(r => {
         problem  = problem.replace(new RegExp(r.find, 'g'), r.replace);
     });
@@ -62,5 +60,13 @@ const replacements = [
     {
         find: 'divided by',
         replace: '/'
+    },
+    {
+        find: 'What is ',
+        replace: ''
+    },
+    {
+        find: '\\?',
+        replace: ''
     }
 ]
