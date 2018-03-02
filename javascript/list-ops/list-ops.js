@@ -1,6 +1,6 @@
 class List {
-    constructor(list) {
-        this.values = list || [];
+    constructor(list = []) {
+        this.values = list;
     }
 
     length() {
