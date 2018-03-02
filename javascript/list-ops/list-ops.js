@@ -4,7 +4,10 @@ class List {
     }
 
     length() {
-        return this.values.length;
+        return this.foldl((val, acc) => {
+            acc = acc + 1;
+            return acc;
+        }, 0);
     }
 
     append(list) {
