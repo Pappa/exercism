@@ -3,17 +3,17 @@ let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 let numbers = '0123456789';
 
 function makeName() {
-    let robotName = getRandomString(letters, 2) + getRandomString(numbers, 3);
-    if (names.has(robotName)) {
+    let name = randomChars(letters, 2) + randomChars(numbers, 3);
+    if (names.has(name)) {
         return makeName();
     }
-    names.add(robotName);
-    return robotName;
+    names.add(name);
+    return name;
 }
 
-function getRandomString(str, len) {
+function randomChars(str, len) {
     return Array(len)
-        .fill(1)
+        .fill(null)
         .map(_ => str.charAt(Math.floor(Math.random() * str.length)))
         .join('');
 }
