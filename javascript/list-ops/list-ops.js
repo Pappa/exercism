@@ -8,9 +8,9 @@ class List {
     }
 
     append(list) {
-        while (list.values.length) {
-            this.values[this.length()] = list.values.shift();
-        }
+        list.values.forEach(item => {
+            this.values.push(item);
+        });
         return this;
     }
 
