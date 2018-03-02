@@ -27,7 +27,7 @@ module.exports = {
 };
 
 function parseProblem(problem) {
-    problem = problem.substring(8, problem.length - 1);
+    problem = problem.replace('What is ','').replace('?','');
 
     replacements.forEach(r => {
         problem  = problem.replace(new RegExp(r.find, 'g'), r.replace);
