@@ -17,14 +17,12 @@ class BeerSong {
     }
 
     sing(v1, v2 = 0) {
-        let output = '';
-        for (let i = v1; i >= v2; i--) {
-            output += this.verse(i);
-            if (i > v2) {
-                output += '\n';
-            }
-        }
-        return output;
+        let diff = v1 - v2 + 1;
+        let index = v1;
+        return Array(diff)
+            .fill(null)
+            .map(_ => this.verse(index--))
+            .join('\n');
     }
 }
 
