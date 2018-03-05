@@ -19,7 +19,7 @@ function decode(str) {
                 multiplier = 1;
                 return acc;
             }
-            if (isNaN(val)) {
+            if (isNaN(Number.parseInt(val, 10))) {
                 acc = acc + Array(multiplier).fill(val).join('');
                 multiplier = 1;
                 return acc;
