@@ -1,6 +1,4 @@
-function sort(word) {
-    return word.split('').sort().join('');
-}
+const sort = word => [...word].sort().join('');
 
 class Anagram {
 
@@ -13,8 +11,7 @@ class Anagram {
         input = (Array.isArray(input[0])) ? input[0] : input;
         return input.filter(word => {
             let lower = word.toLowerCase();
-            let sorted = sort(lower);
-            return (lower !== this.word && sorted === this.sorted);
+            return (lower !== this.word && sort(lower) === this.sorted);
         });
     }
 }
