@@ -6,9 +6,7 @@ class ETL {
 }
 
 const reducer = (output, [n, chars]) => {
-    chars.forEach(c => {
-        output[c.toLowerCase()] = parseInt(n, 10);
-    });
+    chars.forEach(c => output[c.toLowerCase()] = parseInt(n, 10));
     return output;
 }
 
