@@ -7,21 +7,16 @@ class Binary {
     }
 
     toDecimal() {
-        if (!this.isValid()) {
-            return 0;
-        }
-        return this.parse();
+        return this.isValid() ? this.parse() : 0;
     }
 
     isValid() {
-        return this.input
-            .split('')
+        return [...this.input]
             .every(c => VALID.includes(c));
     }
 
     parse() {
-        return this.input
-            .split('')
+        return [...this.input]
             .reverse()
             .reduce((acc, val, index) => {
                 return (val === '1') ? acc + Math.pow(2, index) : acc;
