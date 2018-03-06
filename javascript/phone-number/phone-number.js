@@ -1,11 +1,21 @@
 class PhoneNumber {
     constructor(str) {
-        this.num = str
-            .replace(/(\(|\)| |-)/g, '');
+        this.digits = str
+            .split('')
+            .filter(c => !isNaN(Number.parseInt(c, 10)))
+            .join('')
+            .replace(/^1/, '');
     }
 
     number() {
-        return this.num;
+        return this.isValid() ? this.digits : null;
+    }
+
+    isValid() {
+        return (
+            this.digits.length === 10
+            && this.digits[3] !== '0'
+        );
     }
 }
 
