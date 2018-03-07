@@ -9,14 +9,7 @@ class Triangle {
             throw new Error();
         }
         const size = new Set(this.sides).size;
-        switch (size) {
-            case 1:
-            return 'equilateral';
-            case 2:
-            return 'isosceles';
-            case 3:
-            return 'scalene';
-        }
+        return ['equilateral', 'isosceles', 'scalene'][size - 1];
     }
 
     isValid() {
