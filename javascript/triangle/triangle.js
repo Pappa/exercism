@@ -8,8 +8,8 @@ class Triangle {
         if (!this.isValid()) {
             throw new Error();
         }
-        const unique = [...new Set(this.sides)];
-        switch (unique.length) {
+        const size = new Set(this.sides).size;
+        switch (size) {
             case 1:
             return 'equilateral';
             case 2:
