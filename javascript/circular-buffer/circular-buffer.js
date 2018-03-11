@@ -24,12 +24,10 @@ function CircularBuffer(size) {
     }
 
     function forceWrite(data) {
-        if (buffer.length < size) {
-            write(data);
-        } else {
-            buffer = buffer.slice(1)
-            buffer.push(data);
+        if (buffer.length >= size) {
+            buffer = buffer.slice(1);
         }
+        write(data);
 
     }
 
