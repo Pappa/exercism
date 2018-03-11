@@ -17,9 +17,9 @@ const numerals = [
 module.exports = (arabic) => {
     let = output = '';
     while (arabic) {
-        for (let [n, symbol] of numerals) {
+        for (let [n, roman] of numerals) {
             if (n <= arabic) {
-                output += symbol;
+                output += roman;
                 arabic -= n;
                 break;
             }
