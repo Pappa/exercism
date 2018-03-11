@@ -25,7 +25,7 @@ function CircularBuffer(size) {
 
     function forceWrite(data) {
         if (buffer.length >= size) {
-            buffer = buffer.slice(1);
+            buffer.shift();
         }
         write(data);
 
