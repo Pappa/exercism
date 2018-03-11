@@ -15,10 +15,10 @@ const scoreMap = Object.entries(scores)
     }, {});
 
 module.exports = (word) => {
-    word = word || '';
-    return word
+    return (word || '')
+        .toUpperCase()
         .split('')
         .reduce((acc, c) => {
-            return acc + Number(scoreMap[c.toUpperCase()]);
+            return acc + Number(scoreMap[c]);
         }, 0);
 }
