@@ -7,12 +7,9 @@ const raindrops = {
 class Raindrops {
 
     convert(n) {
-        const factors = [...Array(n + 1).keys()]
-            .filter(x => n % x === 0);
-
         return Object.entries(raindrops)
             .reduce((acc, [drop, factor]) => {
-                return (factors.includes(factor)) ? acc + drop : acc;
+                return (n % factor === 0) ? acc + drop : acc;
             }, '') || n.toString();
     }
 }
