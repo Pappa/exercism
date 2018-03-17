@@ -1,13 +1,3 @@
-const alphanum = 'abcdefghijklmnopqrstuvwxyz1234567890';
-
-const normalise = (str) => {
-    return [...str.toLowerCase()]
-        .filter(c => alphanum.includes(c))
-        .join('');
-}
-
-const cols = (str) => Math.ceil(Math.sqrt(str.length));
-
 const segments = (str, cols) => {
     return [...Array(cols).keys()]
         .map(col => {
@@ -33,8 +23,8 @@ const cipher = (segments) => {
 class Crypto {
 
     constructor(input) {
-        this.normalised = normalise(input);
-        this.cols = cols(this.normalised);
+        this.normalised = input.toLowerCase().replace(/\W/g, '');
+        this.cols = Math.ceil(Math.sqrt(this.normalised.length));
         this.segments = segments(this.normalised, this.cols);
         this.cipher = cipher(this.segments);
     }
