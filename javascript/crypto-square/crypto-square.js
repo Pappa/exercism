@@ -6,19 +6,20 @@ const normalise = (str) => {
         .join('');
 }
 
-const getCols = (str) => Math.ceil(Math.sqrt(str.length));
+const cols = (str) => Math.ceil(Math.sqrt(str.length));
 
-const segment = (str, cols) => {
-    return [...Array(cols - 1).keys()]
+const segments = (str, cols) => {
+    return [...Array(cols).keys()]
         .map(col => {
             let start = col * cols;
             let end = Math.min(str.length, start + cols);
             return str.slice(start, end);
-        });
+        })
+        .filter(row => !!row);
 };
 
 const cipher = (segments) => {
-    let tmp = segments
+    return segments
         .reduce((acc, segment) => {
             [...segment].forEach((c, idx) => {
                 acc[idx] = acc[idx] || '';
@@ -27,16 +28,14 @@ const cipher = (segments) => {
             return acc;
         }, [])
         .join('');
-        console.log(tmp);
-    return tmp;
 };
 
 class Crypto {
 
     constructor(input) {
         this.normalised = normalise(input);
-        this.cols = getCols(this.normalised);
-        this.segments = segment(this.normalised, this.cols);
+        this.cols = cols(this.normalised);
+        this.segments = segments(this.normalised, this.cols);
         this.cipher = cipher(this.segments);
     }
 
