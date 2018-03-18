@@ -8,9 +8,9 @@ class Trinary {
 
     toDecimal() {
         return (isValid(this.trinary)) ?
-            [...Array(this.trinary.length).keys()]
+            [...this.trinary]
                 .reverse()
-                .map((exp, idx) => Number(this.trinary[idx]) * Math.pow(3, exp))
+                .map((n, exp) => Number(n) * Math.pow(3, exp))
                 .reduce((acc, n) => acc + n)
             : 0;
     }
