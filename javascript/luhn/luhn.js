@@ -6,8 +6,7 @@ const isValid = input => {
 };
 
 const checksum = (input) => {
-    let sum = [...input]
-        .filter(c => numbers.includes(c))
+    let sum = [...input.replace(/\D/g, '')]
         .reverse()
         .map((c, idx) => {
             return (Number(c) * (idx % 2 + 1)) % 9;
