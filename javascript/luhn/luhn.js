@@ -1,5 +1,4 @@
-const numbers = '0123456789';
-const valid = numbers + ' ';
+const valid = '0123456789 ';
 
 const isValid = input => {
     return input.length > 1 && [...input].every(c => valid.includes(c));
