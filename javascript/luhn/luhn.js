@@ -10,8 +10,7 @@ const checksum = (input) => {
         .filter(c => numbers.includes(c))
         .reverse()
         .map((c, idx) => {
-            let n = Number(c);
-            return idx % 2 === 0 ? n : (n * 2) % 9;
+            return (Number(c) * (idx % 2 + 1)) % 9;
         })
         .reduce((total, n) => {
             return total + n;
