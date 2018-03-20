@@ -5,18 +5,13 @@ const isValid = input => {
     return input.length > 1 && [...input].every(c => valid.includes(c));
 };
 
-const double = n => {
-    let doubled = n * 2;
-    return doubled > 9 ? doubled - 9 : doubled;
-}
-
 const checksum = (input) => {
     let sum = [...input]
         .filter(c => numbers.includes(c))
         .reverse()
         .map((c, idx) => {
             let n = Number(c);
-            return idx % 2 === 0 ? n : double(n);
+            return idx % 2 === 0 ? n : (n * 2) % 9;
         })
         .reduce((total, n) => {
             return total + n;
