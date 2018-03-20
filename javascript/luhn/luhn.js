@@ -1,7 +1,5 @@
-const valid = '0123456789 ';
-
 const isValid = input => {
-    return input.length > 1 && [...input].every(c => valid.includes(c));
+    return input.length > 1 && input.replace(/[\d ]/g, '').length === 0;
 };
 
 const checksum = (input) => {
