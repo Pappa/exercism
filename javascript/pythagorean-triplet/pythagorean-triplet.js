@@ -1,3 +1,5 @@
+const range = (max, min) => Array.from(new Array(max - min + 1), (_, idx) => idx + min);
+
 class Triplet {
 
     constructor(...numbers) {
@@ -25,7 +27,7 @@ class Triplet {
         const max = options.maxFactor;
         const min = options.minFactor || 1;
         const sum = options.sum;
-        const range = Array.from(new Array(max - min + 1), (_, idx) => idx + min);
+        const over = range(max, min);
         return [];
     }
 
