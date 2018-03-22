@@ -28,6 +28,19 @@ class Triplet {
         const min = options.minFactor || 1;
         const sum = options.sum;
         const over = range(max, min);
+        let results = [];
+        over.forEach(x => {
+            over.forEach(y => {
+                over.forEach(z => {
+                    const triplet = new Triplet(x, y, z);
+                    if (triplet.isPythagorean()) {
+                        if (!sum || triplet.sum() === sum) {
+                            results.push([x, y, z]);
+                        }
+                    }
+                });
+            });
+        });
         return [];
     }
 
