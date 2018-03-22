@@ -2,12 +2,7 @@ class Proverb {
 
     constructor(...words) {
         const last = words[words.length - 1];
-        let qualifier = '';
-        
-        if (last.qualifier) {
-            qualifier = last.qualifier + ' ';
-            words = words.slice(0, words.length - 1);
-        }
+        let qualifier = (last.qualifier) ? words.pop().qualifier + ' ' : '';
 
         this.proverb = words.map((word, idx) => {
             const next = words[idx + 1];
