@@ -41,7 +41,7 @@ class Triplet {
                 });
             });
         });
-        return [];
+        return results;
     }
 
 }
