@@ -35,7 +35,7 @@ class Triplet {
                     const triplet = new Triplet(x, y, z);
                     if (triplet.isPythagorean()) {
                         if (!sum || triplet.sum() === sum) {
-                            results.push([x, y, z]);
+                            results.push(triplet);
                         }
                     }
                 });
