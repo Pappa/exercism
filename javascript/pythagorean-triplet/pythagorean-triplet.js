@@ -1,5 +1,11 @@
 const range = (max, min) => Array.from(new Array(max - min + 1), (_, idx) => idx + min);
 
+const contains = (needle, haystack) => {
+    return haystack.some(arr => {
+        return arr.every((item, idx) => item === needle[idx]);
+    });
+};
+
 class Triplet {
 
     constructor(...numbers) {
@@ -29,13 +35,21 @@ class Triplet {
         const sum = options.sum;
         const over = range(max, min);
         let results = [];
+        let attempts = [];
+        let tmp = [];
         over.forEach(x => {
             over.forEach(y => {
                 over.forEach(z => {
-                    const triplet = new Triplet(x, y, z);
+                    const nums = [x, y, z].sort();
+                    if (attempts.includes(JSON.stringify(nums))) {
+                        return;
+                    }
+                    attempts.push(JSON.stringify(nums));
+                    const triplet = new Triplet(...nums);
                     if (triplet.isPythagorean()) {
                         if (!sum || triplet.sum() === sum) {
                             results.push(triplet);
+                            tmp.push(triplet.numbers);
                         }
                     }
                 });
