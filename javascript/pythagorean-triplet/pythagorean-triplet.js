@@ -22,6 +22,10 @@ class Triplet {
     }
 
     static where(options) {
+        const max = options.maxFactor;
+        const min = options.minFactor || 1;
+        const sum = options.sum;
+        const range = Array.from(new Array(max - min + 1), (_, idx) => idx + min);
         return [];
     }
 
