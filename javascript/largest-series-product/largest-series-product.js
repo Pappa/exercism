@@ -1,5 +1,12 @@
 const product = (a, b) => a * b;
 
+const isValid = (digits, size) => size >= 0 && digits.every(d => !Number.isNaN(d));
+
+const slices = (digits, size) => {
+    return [...Array(digits.length - size + 1).keys()]
+        .map(idx => digits.slice(idx, idx + size));
+}
+
 class Series {
 
     constructor(digits) {
@@ -7,24 +14,16 @@ class Series {
     }
 
     largestProduct(size) {
-        if (!this.isValid(size)) {
+        if (!isValid(this.digits, size)) {
             throw new Error('Invalid input.');
         }
         if (size > this.digits.length) {
             throw new Error('Slice size is too big.');
         }
-        return this.slices(size).reduce((acc, slice) => {
-            return Math.max(acc, slice.reduce(product, 1));
-        }, 0);
-    }
-
-    slices(size) {
-        return [...Array(this.digits.length - size + 1).keys()]
-            .map(idx => this.digits.slice(idx, idx + size));
-    }
-
-    isValid(size) {
-        return size >= 0 && this.digits.every(d => !Number.isNaN(d));
+        return slices(this.digits, size)
+            .reduce((acc, slice) => {
+                return Math.max(acc, slice.reduce(product, 1));
+            }, 0);
     }
 }
 
