@@ -1,4 +1,4 @@
-const digits = [...'0123456789ABCDEF'];
+const digits = [...'0123456789abcdef'];
 
 const isValid = (str) => [...str].every(c => digits.includes(c));
 
@@ -7,7 +7,7 @@ sum = (x, y) => x + y;
 class Hexadecimal {
 
     constructor(hex) {
-        this.hex = hex.toUpperCase();
+        this.hex = hex;
     }
 
     toDecimal() {
