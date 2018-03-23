@@ -1,5 +1,8 @@
 const digits = [...'0123456789ABCDEF'];
+
 const isValid = (str) => [...str].every(c => digits.includes(c));
+
+sum = (x, y) => x + y;
 
 class Hexadecimal {
 
@@ -15,7 +18,7 @@ class Hexadecimal {
                     const idx = digits.indexOf(c);
                     return Number(idx) * Math.pow(16, exp);
                 })
-                .reduce((acc, n) => acc + n)
+                .reduce(sum)
             : 0;
     }
 }
