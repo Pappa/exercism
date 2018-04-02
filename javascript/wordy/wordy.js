@@ -7,11 +7,14 @@ class WordProblem {
     answer() {
         let operations = this.problem.match(opsRegExp);
         let numbers = this.problem.match(numsRegExp);
+
         if (!operations || !numbers) {
             throw new ArgumentError();
         }
+
         numbers = numbers.map(Number);
         let start = numbers.shift();
+        
         return operations.reduce((acc, op, idx) => {
             return maths[op](acc, numbers[idx]);
         }, start);
