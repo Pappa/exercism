@@ -1,15 +1,20 @@
 class WordProblem {
 
     constructor(problem) {
-        this.sum = parseProblem(problem);
+        this.problem = problem;
     }
 
     answer() {
-        try {
-            return eval(this.sum);
-        } catch (e) {
+        let operations = this.problem.match(opsRegExp);
+        let numbers = this.problem.match(numsRegExp);
+        if (!operations || !numbers) {
             throw new ArgumentError();
         }
+        numbers = numbers.map(Number);
+        let start = numbers.shift();
+        return operations.reduce((acc, op, idx) => {
+            return maths[op](acc, numbers[idx]);
+        }, start);
     }
 
 }
@@ -26,47 +31,11 @@ module.exports = {
     ArgumentError: ArgumentError
 };
 
-function parseProblem(problem) {
-    replacements.forEach(r => {
-        problem  = problem.replace(new RegExp(r.find, 'g'), r.replace);
-    });
-    problem = addBrackets(problem);
-    return problem;
-}
-
-function addBrackets(problem) {
-    let parts = problem.split(' ');
-    if (parts.length === 5) {
-        parts.unshift('(');
-        parts.splice(4, 0, ')');
-        problem =  parts.join(' ');
-    }
-    return problem;
-}
-
-const replacements = [
-    {
-        find: 'plus',
-        replace: '+'
-    },
-    {
-        find: 'minus',
-        replace: '-'
-    },
-    {
-        find: 'multiplied by',
-        replace: '*'
-    },
-    {
-        find: 'divided by',
-        replace: '/'
-    },
-    {
-        find: 'What is ',
-        replace: ''
-    },
-    {
-        find: '\\?',
-        replace: ''
-    }
-]
+const maths = {
+    plus: (x, y) => x + y,
+    minus: (x, y) => x - y,
+    divided: (x, y) => x / y,
+    multiplied: (x, y) => x * y
+};
+const opsRegExp = new RegExp(Object.keys(maths).join('|'), 'g');
+const numsRegExp = /(-?[0-9]+)/g;
