@@ -14,7 +14,7 @@ class WordProblem {
 
         numbers = numbers.map(Number);
         let start = numbers.shift();
-        
+
         return operations.reduce((acc, op, idx) => {
             return maths[op](acc, numbers[idx]);
         }, start);
@@ -30,8 +30,8 @@ class ArgumentError extends Error {
 }
 
 module.exports = {
-    WordProblem: WordProblem,
-    ArgumentError: ArgumentError
+    WordProblem,
+    ArgumentError
 };
 
 const maths = {
