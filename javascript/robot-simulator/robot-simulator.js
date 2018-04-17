@@ -13,12 +13,12 @@ class Robot {
 
     turnLeft() {
         const idx = BEARINGS.indexOf(this.bearing);
-        this.bearing = BEARINGS[(idx + 3) % 4];
+        this.bearing = BEARINGS[(idx + BEARINGS.length - 1) % BEARINGS.length];
     }
 
     turnRight() {
         const idx = BEARINGS.indexOf(this.bearing);
-        this.bearing = BEARINGS[(idx + 1) % 4];
+        this.bearing = BEARINGS[(idx + 1) % BEARINGS.length];
     }
 
     at(...coords) {
