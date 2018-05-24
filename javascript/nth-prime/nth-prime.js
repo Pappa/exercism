@@ -1,10 +1,16 @@
 const LOW_PRIMES = [2, 3, 5, 7, 9, 13];
+
+const range = (end, start = 0) => [...Array(end + 1).keys()].slice(start);
+
 const isPrime = (n) => {
     if (n < 7) {
         return LOW_PRIMES.includes(n);
     }
-    console.log(JSON.stringify(range(Math.floor(Math.sqrt(n)) + 1, 2).filter(x => x % 2)))
-    return range(Math.floor(Math.sqrt(n)) + 1, 2)
+    if (n % 2 === 0) {
+        return false;
+    }
+    const max = Math.floor(Math.sqrt(n));
+    return !range(max, 2)
         .filter(x => x % 2)
         .some(i => (n % i === 0));
 };
@@ -22,11 +28,7 @@ module.exports = {
             }
             candidate++;
         }
-        console.log(JSON.stringify(primes));
         return primes.pop();
     }
 };
-
-
-const range = (end, start = 0) => [...Array(end + 1).keys()].slice(start);
 

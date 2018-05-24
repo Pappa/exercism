@@ -13,7 +13,7 @@ describe('Prime', function () {
     expect(prime.nth(6)).toEqual(13);
   });
 
-  xit('big prime', function () {
+  it('big prime', function () {
     expect(prime.nth(10001)).toEqual(104743);
   });
 
