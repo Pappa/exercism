@@ -1,10 +1,10 @@
 class CustomSet {
 
-    constructor(input) {
-        this.values = (input) ? input
+    constructor(input = []) {
+        this.values = input
             .reduce((acc, v) => {
                 return acc.includes(v) ? acc : acc.concat(v);
-            }, []) : [];
+            }, []);
         this.values.sort();
     }
 
