@@ -202,7 +202,7 @@ describe('CustomSet', function () {
     expect(actual.eql(expected)).toBe(true);
   });
 
-  xit('can be emptied', function () {
+  it('can be emptied', function () {
     var actual = new CustomSet([1, 2]).clear();
     var expected = new CustomSet();
     expect(actual.eql(expected)).toBe(true);
@@ -211,7 +211,7 @@ describe('CustomSet', function () {
     expect(actual2.eql(expected2)).toBe(true);
   });
 
-  xit('knows its size', function () {
+  it('knows its size', function () {
     var actual = new CustomSet().size();
     expect(actual).toBe(0);
     var actual2 = new CustomSet([1, 2, 3]).size();
@@ -220,7 +220,7 @@ describe('CustomSet', function () {
     expect(actual3).toBe(3);
   });
 
-  xit('can give back a list', function () {
+  it('can give back a list', function () {
     var actual = new CustomSet().toList();
     var expected = [];
     expect(actual.sort()).toEqual(expected);
