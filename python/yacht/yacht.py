@@ -21,6 +21,3 @@ def score(dice, category):
         return sum([x for x in dice if x == category])
     else:
         return category(dice, ds)
-
-def counts(dice):
-    return  { x: dice.count(x) for x in dice }
