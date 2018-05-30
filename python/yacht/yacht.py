@@ -15,47 +15,57 @@ CHOICE = 'CHOICE'
 
 
 def score(dice, category):
-    if category == YACHT and isYacht(dice):
+    dice_set = set(dice)
+    dice_counts = counts(dice)
+
+    if category == YACHT:
+        return calculateYacht(dice_set)
+    elif category == CHOICE:
+        return sum(dice)
+    elif category == BIG_STRAIGHT:
+        return calculateBigStraight(dice_set)
+    elif category == LITTLE_STRAIGHT:
+        return calculateLittleStraight(dice_set)
+    elif category in [ONES, TWOS, THREES, FOURS, FIVES, SIXES]:
+        return sum([x for x in dice if x == category])
+    elif category == FULL_HOUSE:
+        return calculateFullHouse(dice, dice_set, dice_counts)
+    elif category == FOUR_OF_A_KIND:
+        return calculateFourOfAKind(dice_set, dice_counts)
+    else:
+        return 0
+
+
+def calculateYacht(dice_set):
+    if len(dice_set) == 1:
         return 50
-    if category == CHOICE:
-        return sum(dice)
-    if category == BIG_STRAIGHT and isBigStraight(dice):
+    else:
+        return 0
+
+def calculateBigStraight(dice_set):
+    if len(dice_set) == 5 and 1 not in dice_set:
         return 30
-    if category == LITTLE_STRAIGHT and isLittleStraight(dice):
+    else:
+        return 0
+
+def calculateLittleStraight(dice_set):
+    if len(dice_set) == 5 and 6 not in dice_set:
         return 30
-    if category in [ONES, TWOS, THREES, FOURS, FIVES, SIXES]:
-        return sumOfNumber(dice, category)
-    if category == FULL_HOUSE and isFullHouse(dice):
+    else:
+        return 0
+
+def calculateFullHouse(dice, dice_set, dice_counts):
+    if len(dice_set) == 2 and all(count > 1 for count in dice_counts.values()):
         return sum(dice)
-    if category == FOUR_OF_A_KIND and isFourOfAKind(dice):
-        dice_counts = counts(dice)
+    else:
+        return 0
+
+
+def calculateFourOfAKind(dice_set, dice_counts):
+    if len(dice_set) <= 2 and any(count >= 4 for count in dice_counts.values()):
         return [n for n, c in dice_counts.items() if c >= 4][0] * 4
-    return 0
-
-
-def isYacht(dice):
-    return len(set(dice)) == 1
-
-def isBigStraight(dice):
-    dice_set = set(dice)
-    return len(dice_set) == 5 and 1 not in dice_set
-
-def isLittleStraight(dice):
-    dice_set = set(dice)
-    return len(dice_set) == 5 and 6 not in dice_set
-
-def isFullHouse(dice):
-    dice_set = set(dice)
-    dice_counts = counts(dice)
-    return len(dice_set) == 2 and all(count > 1 for count in dice_counts.values())
-
-def isFourOfAKind(dice):
-    dice_set = set(dice)
-    dice_counts = counts(dice)
-    return len(dice_set) <= 2 and any(count >= 4 for count in dice_counts.values())
-
-def sumOfNumber(dice, n):
-    return sum([x for x in dice if x == n])
+    else:
+        return 0
 
 def counts(dice):
     return  { x: dice.count(x) for x in dice }
