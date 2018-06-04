@@ -21,7 +21,7 @@ describe('Queens', function () {
       expect(queens.white).toEqual([2, 4]);
       expect(queens.black).toEqual([2, 4]);
     } catch (error) {
-      expect(error).toEqual(new Error('Queens cannot share the same space'));
+      expect(error).toEqual('Queens cannot share the same space');
     }
   });
 

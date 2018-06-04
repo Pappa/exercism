@@ -4,7 +4,7 @@ class Queens {
         this.black = pos.black;
         this.pos = pos;
         if (!isValid(pos)) {
-            throw new Error('Queens cannot share the same space');
+            throw 'Queens cannot share the same space';
         }
     }
 
