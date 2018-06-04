@@ -28,7 +28,7 @@ const canAttackOrthogonally = ({ white, black }) => white.some((v, idx) => v ===
 const canAttackDiagonally = ({ white, black }) => {
     const deltaX = Math.abs(white[0] - black[0]);
     const deltaY = Math.abs(white[1] - black[1]);
-    return deltaY / deltaX === 1;
+    return deltaY === deltaX;
 };
 
 const isValid = ({ white, black }) => white.some((v, idx) => v !== black[idx]);
