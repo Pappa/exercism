@@ -16,13 +16,13 @@ const getLastWeekStart = (year, month) => {
 module.exports = (year, month, day, descriptor) => {
     const weekStart = (descriptor === 'last') ? getLastWeekStart(year, month) : WEEK_START[descriptor];
     const weekStartDate = new Date(year, month, weekStart);
-    console.log('weekStartDate', weekStartDate.toString());
     const weekStartDay = weekStartDate.getDay();
     const dayNumber = DAYS.indexOf(day);
-    const dayOffset = (dayNumber >= weekStartDay) ? dayNumber - weekStartDay : dayNumber + (6 - weekStartDay);
-    console.log('weekStartDay', weekStartDay, 'dayNumber', dayNumber, 'dayOffset', dayOffset);
-    let result = new Date(year, month);
-    result.setDate(weekStartDate.getDate() + dayOffset);
-    return result;
+    const dayOffset = (dayNumber >= weekStartDay) ? dayNumber - weekStartDay : dayNumber + (7 - weekStartDay);
+    const date = weekStartDate.getDate() + dayOffset;
+    if (weekStartDate.getMonth() !== new Date(year, month).getMonth()) {
+        throw 'Invalid date';
+    }
+    return new Date(year, month, date);
 };
 
