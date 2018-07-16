@@ -9,3 +9,5 @@ __pycache__
 *.code-workspace
 elm-stuff
 elm-package.json
+csharp/*/bin
+csharp/*/obj
