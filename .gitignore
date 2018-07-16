@@ -6,5 +6,6 @@
 .pytest_cache
 __pycache__
 *.pyc
+*.code-workspace
 elm-stuff
 elm-package.json
