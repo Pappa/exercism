@@ -4,12 +4,12 @@ const other = {
 };
 
 class TwoBucket {
-    constructor(bucketOneSize, bucketTwoSize, goal, firstBucket) {
-        this.initBuckets(bucketOneSize, bucketTwoSize);
+    constructor(s1, s2, goal, first) {
+        this.initBuckets(s1, s2);
         this.goal = goal;
-        this.primary = firstBucket;
-        this.secondary = other[firstBucket];
-        this.moveCount = 0;
+        this.primary = first;
+        this.secondary = other[first];
+        this.count = 0;
         this.fillPrimary();
         this.calculate();
     }
@@ -23,16 +23,18 @@ class TwoBucket {
 
     fillPrimary() {
         this.buckets[this.primary].value = this.buckets[this.primary].size;
-        this.moveCount++;
+        this.count++;
     }
 
     calculate() {
-        if (this.buckets.one.value = this.goal
-            || this.buckets.two.value = this.goal) {
+        if (this.buckets.one.value === this.goal
+            || this.buckets.two.value === this.goal) {
             console.log('done tidy up');
         } else {
-            if (this.isFull(this.buckets[this.primary]
+            if (this.isFull(this.buckets[this.primary])
                 && !this.isFull(this.buckets[this.secondary])
+            )
+            console.log('calculate here');
                 // should be able to 'pour' with % 
             //this.calculate();
         }
@@ -44,7 +46,7 @@ class TwoBucket {
     }
 
     moves() {
-        return this.moveCount;
+        return this.count;
     }
 
     get goalBucket() {
