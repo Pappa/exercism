@@ -1,8 +1,11 @@
 module LeapYear (isLeapYear) where
 
-isDivisibleBy :: Integer -> Integer -> Bool
-isDivisibleBy x y = x `rem` y == 0 
+divBy :: Integer -> Integer -> Bool
+divBy x y = x `rem` y == 0 
 
 isLeapYear :: Integer -> Bool
-isLeapYear year = (year `isDivisibleBy` 4 && (not (year `isDivisibleBy` 100) || (year `isDivisibleBy` 400)))
-
+isLeapYear year
+  | year `divBy` 400 = True
+  | year `divBy` 100 = False
+  | year `divBy` 4   = True
+  | otherwise        = False
