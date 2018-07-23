@@ -29,11 +29,10 @@ public static class Bob
         return whatever;
     }
 
-    private static bool IsQuestion(string statement) => statement.EndsWith("?");
+    private static bool IsQuestion(string statement) => 
+        statement.EndsWith("?");
 
-    private static bool IsAllUpper(char[] letters)
-    {
-        return letters.Length > 0 
-            && Array.TrueForAll(letters, Char.IsUpper);
-    }
+    private static bool IsAllUpper(char[] letters) =>
+        letters.Length > 0 
+        && Array.TrueForAll(letters, Char.IsUpper);
 }
