@@ -14,18 +14,26 @@ public static class Bob
         string statement = input.Trim();
         char[] letters = Regex.Replace(statement, @"[^a-zA-Z]", "").ToCharArray();
 
-        if (letters.Length > 0 && Array.TrueForAll(letters, Char.IsUpper)) {
-            if (statement.EndsWith("?")) {
+        if (IsAllUpper(letters)) {
+            if (IsQuestion(statement)) {
                 return calm;
             }
             return yell;
         }
-        if (statement.EndsWith("?")) {
+        if (IsQuestion(statement)) {
             return question;
         }
         if (statement == "") {
             return nada;
         }
         return whatever;
+    }
+
+    private static bool IsQuestion(string statement) => statement.EndsWith("?");
+
+    private static bool IsAllUpper(char[] letters)
+    {
+        return letters.Length > 0 
+            && Array.TrueForAll(letters, Char.IsUpper);
     }
 }
