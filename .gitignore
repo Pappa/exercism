@@ -12,3 +12,4 @@ elm-package.json
 csharp/*/bin
 csharp/*/obj
 *.code-workspace
+.DS_Store
