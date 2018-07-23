@@ -12,9 +12,8 @@ public static class Bob
     public static string Response(string input)
     {
         string statement = input.Trim();
-        char[] letters = Regex.Replace(statement, @"[^a-zA-Z]", "").ToCharArray();
 
-        if (IsAllUpper(letters)) {
+        if (IsUpperCase(statement)) {
             if (IsQuestion(statement)) {
                 return calm;
             }
@@ -23,16 +22,23 @@ public static class Bob
         if (IsQuestion(statement)) {
             return question;
         }
-        if (statement == "") {
+        if (IsEmpty(statement)) {
             return nada;
         }
         return whatever;
     }
 
-    private static bool IsQuestion(string statement) => 
-        statement.EndsWith("?");
+    private static bool IsEmpty(string input) => 
+        input == "";
 
-    private static bool IsAllUpper(char[] letters) =>
-        letters.Length > 0 
-        && Array.TrueForAll(letters, Char.IsUpper);
+    private static bool IsQuestion(string input) => 
+        input.EndsWith("?");
+
+    private static bool IsUpperCase(string input)
+    {
+        char[] letters = Regex.Replace(input, @"[^a-zA-Z]", "").ToCharArray();
+
+        return letters.Length > 0 
+            && Array.TrueForAll(letters, Char.IsUpper);
+    }
 }
