@@ -3,38 +3,29 @@ using System.Text.RegularExpressions;
 
 public static class Bob
 {
-    private const string question = "Sure.";
-    private const string yell = "Whoa, chill out!";
-    private const string nada = "Fine. Be that way!";
-    private const string whatever = "Whatever.";
-    private const string calm = "Calm down, I know what I'm doing!";
-
     public static string Response(string input)
     {
         string statement = input.Trim();
 
-        if (IsUpperCase(statement)) {
-            if (IsQuestion(statement)) {
-                return calm;
-            }
-            return yell;
-        }
-        if (IsQuestion(statement)) {
-            return question;
-        }
-        if (IsEmpty(statement)) {
-            return nada;
-        }
-        return whatever;
-    }
+        if (String.IsNullOrEmpty(statement)) 
+            return "Fine. Be that way!";
 
-    private static bool IsEmpty(string input) => 
-        input == "";
+        if (IsShouting(statement) && IsQuestion(statement))
+            return "Calm down, I know what I'm doing!";
+
+        if (IsShouting(statement)) 
+            return "Whoa, chill out!";
+
+        if (IsQuestion(statement))
+            return "Sure.";
+
+        return "Whatever.";
+    }
 
     private static bool IsQuestion(string input) => 
         input.EndsWith("?");
 
-    private static bool IsUpperCase(string input)
+    private static bool IsShouting(string input)
     {
         char[] letters = Regex.Replace(input, @"[^a-zA-Z]", "").ToCharArray();
 
