@@ -2,7 +2,6 @@ using System;
 
 public class Robot
 {
-   private string name;
    
    public Robot()
    {
@@ -10,7 +9,9 @@ public class Robot
    }
     public string Name
     {
-        get => name;
+        get;
+
+        private set;
     }
 
     public void Reset()
@@ -19,8 +20,8 @@ public class Robot
         string numbers = "1234567890";
         Random rand = new Random();
 
-        name = GetRandomCharsFromString(letters, 2, rand);
-        name += GetRandomCharsFromString(numbers, 3, rand);
+        Name = GetRandomCharsFromString(letters, 2, rand);
+        Name += GetRandomCharsFromString(numbers, 3, rand);
     }
 
     private string GetRandomCharsFromString(string s, int n, Random r)
