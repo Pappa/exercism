@@ -5,6 +5,6 @@ public static class ReverseString
 {
     public static string Reverse(string input)
     {
-        return string.Join("", input.ToArray().Reverse());
+        return string.Join("", input.Reverse());
     }
 }
