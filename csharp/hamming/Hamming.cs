@@ -10,7 +10,9 @@ public static class Hamming
             throw new ArgumentException();
         }
         return first.ToCharArray()
-            .Zip(second.ToCharArray(), (a, b) => a != b ? 1 : 0)
+            .Zip(second.ToCharArray(), CountIfDifferent)
             .Sum();
     }
+
+    private static int CountIfDifferent(char a, char b) => a != b ? 1 : 0;
 }
