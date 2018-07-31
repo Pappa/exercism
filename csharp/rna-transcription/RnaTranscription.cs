@@ -14,7 +14,7 @@ public static class RnaTranscription
 
     public static string ToRna(string nucleotide)
     {
-        var transposed = nucleotide.Select(Transpose).ToArray();
+        var transposed = nucleotide.Select(Transpose);
         return String.Join("", transposed);
     }
 
