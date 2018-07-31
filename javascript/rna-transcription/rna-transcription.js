@@ -1,26 +1,27 @@
-var nucleotides = 'GCTA'.split('');
-
-var nucleotideMap = {
+const TRANSCRIPTION_MAP = {
 	G: 'C',
 	C: 'G',
 	T: 'A',
 	A: 'U'
 };
 
-function isValid(nucleotideArray) {
-	return nucleotideArray.every(n => nucleotides.includes(n));
-}
+const NUCLEOTIDES = Object.keys(TRANSCRIPTION_MAP);
 
-function DnaTranscriber() {};
+class DnaTranscriber {
 
-DnaTranscriber.prototype.toRna = (str) => {
-	var nucleotideArray = str.split('');
-	if (isValid(nucleotideArray)) {
-		return nucleotideArray
-			.map(n => nucleotideMap[n])
+	toRna(str) {
+		const letters = [...str];
+		if (!this.isValid(letters)) {
+			throw new Error('Invalid input');
+		}
+		return letters
+			.map(n => TRANSCRIPTION_MAP[n])
 			.join('');
 	}
-	throw new Error('Invalid input');
-};
+
+	isValid(letters) {
+		return letters.every(n => NUCLEOTIDES.includes(n));
+	}
+}
 
 module.exports = DnaTranscriber;
