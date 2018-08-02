@@ -27,8 +27,7 @@ let (|Question|_|) (statement: string) =
     else None
 
 let response (input: string) = 
-    let statement = input.Trim()
-    match statement with
+    match input.Trim() with
     | Nothing -> "Fine. Be that way!"
     | Shouting & Question -> "Calm down, I know what I'm doing!"
     | Shouting -> "Whoa, chill out!"
