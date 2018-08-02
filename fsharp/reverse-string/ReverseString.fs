@@ -3,6 +3,6 @@
 open System
 
 let reverse (input: string): string = 
-    input.ToCharArray()
+    Seq.toArray input
     |> Array.rev
     |> String
