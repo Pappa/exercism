@@ -13,7 +13,7 @@ let toBase10 (digits: int list) (inputBase: int): int =
 let rec rebase' (x: int) (targetBase: int): int seq = 
     seq { 
         yield x % targetBase
-        let quotient = float x / float targetBase |> floor |> int
+        let quotient = x / targetBase
         match quotient with 
         | 0 -> () 
         | _ -> yield! rebase' quotient targetBase
