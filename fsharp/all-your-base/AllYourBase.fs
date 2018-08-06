@@ -14,9 +14,8 @@ let rec rebase' (x: int) (targetBase: int): int seq =
     seq { 
         yield x % targetBase
         let quotient = x / targetBase
-        match quotient with 
-        | 0 -> () 
-        | _ -> yield! rebase' quotient targetBase
+        if quotient > 0
+        then yield! rebase' quotient targetBase
     }
         
 
