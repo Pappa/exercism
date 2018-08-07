@@ -3,10 +3,10 @@
 open System
 
 let multiples (max: int) (n: int) : int list = 
-    [ for i in n .. n .. (max - 1) -> i ]
+    [ for i in n .. n .. max -> i ]
 
-let sum (numbers: int list) (max: int): int = 
+let sum (numbers: int list) (upperBound: int): int = 
     numbers
-    |> List.collect (multiples max)
+    |> List.collect (multiples (upperBound - 1))
     |> Seq.distinct
     |> Seq.sum 
