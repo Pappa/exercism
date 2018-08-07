@@ -20,7 +20,6 @@ let prime (nth: int): int option =
     | _ -> 
         primes 2
         |> Seq.take nth
-        |> List.ofSeq
-        |> List.rev
-        |> List.head
+        |> Seq.rev
+        |> Seq.head
         |> Some
