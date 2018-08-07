@@ -1,10 +1,13 @@
 ﻿module NthPrime
 
-let LOW_PRIMES = [2; 3; 5; 7; 9; 13]
+let LOW_PRIMES = [2; 3; 5; 7; 11; 13]
 
 let isPrime n =
-    [2 .. (float >> sqrt >> int) n]
-    |> List.forall (fun x -> n % x <> 0)
+    match n with
+    | _ when List.contains n LOW_PRIMES -> true
+    | _ -> 
+        [2 .. (float >> sqrt >> int) n]
+        |> List.forall (fun x -> n % x <> 0)
 
 let rec primes n =
     seq {
