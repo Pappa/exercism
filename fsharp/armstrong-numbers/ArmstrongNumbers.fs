@@ -9,4 +9,5 @@ let isArmstrongNumber (number: int): bool =
     let digits = toDigits number
     let pow = digits.Length
 
-    List.sum [ for d in digits -> pown d pow ] |> (=) number
+    List.sum [ for d in digits -> pown d pow ]
+    |> (=) number
