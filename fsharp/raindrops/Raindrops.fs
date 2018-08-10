@@ -8,4 +8,7 @@ let getRaindrops (number: int) (acc: string) (factor: int, str: string): string 
 let convert (number: int): string = 
     raindrops 
     |> List.fold (getRaindrops number) ""
-    |> (fun str -> if str.Length > 0 then str else string number) 
+    |> fun str -> 
+        match str.Length with
+        | 0 -> string number 
+        | _ -> str
