@@ -1,7 +1,5 @@
 ﻿module Raindrops
 
-open System
-
 let raindrops = [(3, "Pling"); (5, "Plang"); (7, "Plong")]
 
 let getRaindrop (number: int) (factor, str) =
