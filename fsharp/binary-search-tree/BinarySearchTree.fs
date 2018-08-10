@@ -6,18 +6,22 @@ type BST<'a> =
     | Leaf
     | Node of BST<'a> * 'a * BST<'a>
 
-let private simgleton (value: 'a): BST<'a> = 
-    Node (Leaf, value, Leaf)
+let private simgleton (value: 'a): BST<'a> = Node (Leaf, value, Leaf)
 
-let left node = function
+let left node = 
+    match node with
+    | Node (Leaf, _, _) -> None
     | Node (x, _, _) -> Some x
     | Leaf -> None
 
-let right node = function
+let right node = 
+    match node with
+    | Node (_, _, Leaf) -> None
     | Node (_, _, x) -> Some x
     | Leaf -> None
 
-let data node = function 
+let data node = 
+    match node with
     | Node (_, x, _) -> x
     | _ -> failwith "Oops"
 

@@ -12,8 +12,8 @@ open System
 let ``Data is retained`` () =
     let treeData = create [4]
     treeData |> data |> should equal 4
-    //treeData |> left |> should equal None
-    //treeData |> right |> should equal None
+    treeData |> left |> should equal None
+    treeData |> right |> should equal None
 
 // [<Fact(Skip = "Remove to run test")>]
 // let ``Can create complex tree`` () =
