@@ -1,6 +1,6 @@
 # Hamming
 
-Write a program that can calculate the Hamming difference between two DNA strands.
+Calculate the Hamming difference between two DNA strands.
 
 A mutation is simply a mistake that occurs during the creation or
 copying of a nucleic acid, in particular DNA. Because nucleic acids are
@@ -82,7 +82,7 @@ stack ghci
 
 ## Feedback, Issues, Pull Requests
 
-The [exercism/xhaskell](https://github.com/exercism/xhaskell) repository on
+The [exercism/haskell](https://github.com/exercism/haskell) repository on
 GitHub is the home for all of the Haskell exercises.
 
 If you have feedback about an exercise, or want to help implementing a new
@@ -92,6 +92,5 @@ one, head over there and create an issue.  We'll do our best to help you!
 
 The Calculating Point Mutations problem at Rosalind [http://rosalind.info/problems/hamm/](http://rosalind.info/problems/hamm/)
 
-## Submitting Incomplete Problems
+## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
-

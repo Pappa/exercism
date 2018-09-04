@@ -11,16 +11,13 @@ main :: IO ()
 main = hspecWith defaultConfig {configFastFail = True} specs
 
 specs :: Spec
-specs = describe "hamming" $
-          describe "distance" $ for_ cases test
+specs = describe "distance" $ for_ cases test
   where
 
     test Case{..} = it description assertion
       where
         assertion  = expression `shouldBe` fromIntegral <$> expected
         expression = distance strand1 strand2
-
--- Test cases adapted from `exercism/x-common/hamming.json` on 2016-07-12.
 
 data Case = Case { description :: String
                  , strand1     :: String
@@ -29,7 +26,12 @@ data Case = Case { description :: String
                  }
 
 cases :: [Case]
-cases = [ Case { description = "identical strands"
+cases = [ Case { description = "empty strands"
+               , strand1     = ""
+               , strand2     = ""
+               , expected    = Just 0
+               }
+        , Case { description = "identical strands"
                , strand1     = "A"
                , strand2     = "A"
                , expected    = Just 0
@@ -65,13 +67,13 @@ cases = [ Case { description = "identical strands"
                , expected    = Just 2
                }
         , Case { description = "non-unique character in first strand"
-               , strand1     = "AGA"
-               , strand2     = "AGG"
+               , strand1     = "AAG"
+               , strand2     = "AAA"
                , expected    = Just 1
                }
         , Case { description = "non-unique character in second strand"
-               , strand1     = "AGG"
-               , strand2     = "AGA"
+               , strand1     = "AAA"
+               , strand2     = "AAG"
                , expected    = Just 1
                }
         , Case { description = "same nucleotides in different positions"
@@ -88,11 +90,6 @@ cases = [ Case { description = "identical strands"
                , strand1     = "GGACGGATTCTG"
                , strand2     = "AGGACGGATTCT"
                , expected    = Just 9
-               }
-        , Case { description = "empty strands"
-               , strand1     = ""
-               , strand2     = ""
-               , expected    = Just 0
                }
         , Case { description = "disallow first strand longer"
                , strand1     = "AATG"
