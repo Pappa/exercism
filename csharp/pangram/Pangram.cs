@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 public static class Pangram
@@ -8,9 +9,8 @@ public static class Pangram
         UniqueLetters(input).Length == 26;
 
     private static char[] UniqueLetters(string input) => 
-        Regex.Replace(input, @"[^a-zA-Z]", "")
-            .ToUpper()
-            .ToCharArray()
+        input.Where(c => Char.IsLetter(c))
+            .Select(c => Char.ToUpper(c))
             .Distinct()
             .ToArray();
 }
