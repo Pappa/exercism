@@ -25,6 +25,10 @@ let secondary (n: int): string =
         let num = if n > 1 then "one" else "it"
         sprintf "Take %s down and pass it around, %s on the wall." num str
 
-let recite (start: int) (takeDown: int): string list = 
-    let range = [start .. -1 .. start - takeDown + 1]
-    range |> List.map (fun n -> primary n) |> (@) <| [secondary start]
+let couplet(start: int) (take: int) (n: int) : string list =
+    let lines = [primary n; secondary n]
+    if n + take - 1 = start then lines else lines @ [""]
+
+let recite (start: int) (take: int): string list = 
+    let range = [start .. -1 .. start - take + 1]
+    range |> List.map (couplet start take) |> Seq.concat |> List.ofSeq
