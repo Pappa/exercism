@@ -16,3 +16,5 @@ fsharp/*/obj
 *.code-workspace
 .DS_Store
 .vscode
+.gradle/
+build/
