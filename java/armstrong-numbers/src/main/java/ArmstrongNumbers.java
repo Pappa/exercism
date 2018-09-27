@@ -10,9 +10,7 @@ class ArmstrongNumbers {
 	boolean isArmstrongNumber(int n) {
 		String str = Integer.toString(n);
 		double pow = str.length();
-		return n == str
-			.chars()
-			.map(c -> Character.getNumericValue(c))
+		return n == this.getDigits(str)
 			.map(d -> (int)Math.pow((double)d, pow))
 			.sum();
 	}
