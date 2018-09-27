@@ -1,11 +1,10 @@
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.*;
 
 class ArmstrongNumbers {
 
 	IntStream getDigits(String n) {
-		return n.chars().map(c -> Character.getNumericValue(c));
+		return n.chars()
+			.map(c -> Character.getNumericValue(c));
 	}
 
 	boolean isArmstrongNumber(int n) {
