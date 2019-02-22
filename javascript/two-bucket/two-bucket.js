@@ -14,10 +14,10 @@ class Bucket {
 
   pour(bucket) {
     bucket.value += this.value;
-    this.value = 0;
+    this.empty();
     if (bucket.value > bucket.size) {
       this.value = bucket.value - bucket.size;
-      bucket.value = bucket.size;
+      bucket.fill();
     }
   }
 
@@ -36,23 +36,21 @@ class TwoBucket {
     this.otherBucket = startWith === "one" ? s2 : s1;
     this.count = 0;
 
-    this.buckets = {
-      primary: new Bucket(startWith === "one" ? s1 : s2),
-      secondary: new Bucket(startWith === "one" ? s2 : s1)
-    };
+    this.primary = new Bucket(startWith === "one" ? s1 : s2);
+    this.secondary = new Bucket(startWith === "one" ? s2 : s1);
 
-    while (this.buckets.primary.value !== goal) {
-      if (this.buckets.primary.isEmpty()) {
-        this.buckets.primary.fill();
+    while (this.primary.value !== goal) {
+      if (this.primary.isEmpty()) {
+        this.primary.fill();
         this.count++;
       }
 
-      if (this.buckets.secondary.isFull()) {
-        this.buckets.secondary.empty();
+      if (this.secondary.isFull()) {
+        this.secondary.empty();
         this.count++;
       }
 
-      this.buckets.primary.pour(this.buckets.secondary);
+      this.primary.pour(this.secondary);
       this.count++;
     }
   }
