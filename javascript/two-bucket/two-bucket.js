@@ -1,66 +1,65 @@
-const other = {
-    one: 'two',
-    two: 'one'
-};
+class Bucket {
+  constructor(size) {
+    this.size = size;
+    this.value = 0;
+  }
+
+  fill() {
+    this.value = this.size;
+  }
+
+  empty() {
+    this.value = 0;
+  }
+
+  pour(bucket) {
+    bucket.value += this.value;
+    this.value = 0;
+    if (bucket.value > bucket.size) {
+      this.value = bucket.value - bucket.size;
+      bucket.value = bucket.size;
+    }
+  }
+
+  isEmpty() {
+    return this.value === 0;
+  }
+
+  isFull() {
+    return this.value === this.size;
+  }
+}
 
 class TwoBucket {
-    constructor(s1, s2, goal, first) {
-        this.initBuckets(s1, s2);
-        this.goal = goal;
-        this.primary = first;
-        this.secondary = other[first];
-        this.count = 0;
-        this.fillPrimary();
-        this.calculate();
-    }
+  constructor(s1, s2, goal, startWith) {
+    this.goalBucket = startWith;
+    this.otherBucket = startWith === "one" ? s2 : s1;
+    this.count = 0;
 
-    initBuckets(s1, s2) {
-        this.buckets = {
-            one: { size: s1, value: 0 },
-            two: { size: s2, value: 0 }
-        };
-    }
+    this.buckets = {
+      primary: new Bucket(startWith === "one" ? s1 : s2),
+      secondary: new Bucket(startWith === "one" ? s2 : s1)
+    };
 
-    fillPrimary() {
-        this.buckets[this.primary].value = this.buckets[this.primary].size;
+    while (this.buckets.primary.value !== goal) {
+      if (this.buckets.primary.isEmpty()) {
+        this.buckets.primary.fill();
         this.count++;
-    }
+      }
 
-    calculate() {
-        if (this.buckets.one.value === this.goal
-            || this.buckets.two.value === this.goal) {
-            console.log('done tidy up');
-        } else {
-            if (this.isFull(this.buckets[this.primary])
-                && !this.isFull(this.buckets[this.secondary])
-            )
-            console.log('calculate here');
-                // should be able to 'pour' with % 
-            //this.calculate();
-        }
+      if (this.buckets.secondary.isFull()) {
+        this.buckets.secondary.empty();
+        this.count++;
+      }
 
+      this.buckets.primary.pour(this.buckets.secondary);
+      this.count++;
     }
+  }
 
-    isFull(bucket) {
-        return bucket.value === bucket.size;
-    }
-
-    moves() {
-        return this.count;
-    }
-
-    get goalBucket() {
-        this.primary;
-    }
-
-    get otherBucket() {
-        this.buckets[this.secondary].value;
-    }
-
-    switchPrimary() {
-        this.primary = other[this.primary];
-        this.secondary = other[this.secondary];
-    }
+  moves() {
+    return this.count;
+  }
 }
 
 module.exports = TwoBucket;

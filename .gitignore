@@ -18,3 +18,4 @@ fsharp/*/obj
 .vscode
 .gradle/
 build/
+node_modules/
