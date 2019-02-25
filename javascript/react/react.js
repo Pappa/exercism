@@ -9,7 +9,7 @@ export class InputCell {
     this.callHandlers();
   }
 
-  onChanged(handler) {
+  addCallback(handler) {
     this.handlers.push(handler);
   }
 
@@ -18,22 +18,19 @@ export class InputCell {
   }
 }
 
-export class ComputeCell {
+export class ComputeCell extends InputCell {
   constructor(inputs, fn) {
+    super(inputs);
     this.fn = fn;
     this.setValue(fn(inputs));
     inputs.forEach(input => {
-      input.onChanged(() => {
+      input.addCallback(() => {
         this.setValue(fn(inputs));
       });
     });
   }
-
-  setValue(v) {
-    this.value = v;
-  }
 }
 
 export class CallbackCell {
-  constructor() {}
+  constructor(fn) {}
 }
