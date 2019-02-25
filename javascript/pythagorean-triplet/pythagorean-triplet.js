@@ -22,5 +22,26 @@ export class Triplet {
     return a2 + b2 == c2 || b2 + c2 == a2 || a2 + c2 == b2;
   }
 
-  where() {}
+  static where({ sum, minFactor = 1, maxFactor }) {
+    const as = range(maxFactor, minFactor);
+    console.log(as);
+    const results = [];
+    const s = new Set();
+    as.forEach(a => {
+      const bs = range(maxFactor, minFactor);
+      bs.forEach(b => {
+        const cs = range(maxFactor, minFactor);
+        cs.forEach(c => {
+          if (Math.pow(a, 2) + Math.pow(b, 2) === Math.pow(c, 2)) {
+            const t = [a, b, c].sort().join(",");
+            if (!s.has(t)) {
+              s.add(t);
+              results.push(new Triplet(a, b, c));
+            }
+          }
+        });
+      });
+    });
+    return results;
+  }
 }
