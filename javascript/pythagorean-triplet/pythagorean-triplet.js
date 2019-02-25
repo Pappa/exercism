@@ -1,5 +1,4 @@
-const range = (length, start = 0) =>
-  [...Array(length + start).keys()].slice(start);
+const range = (length, start = 0) => [...Array(length + 1).keys()].slice(start);
 
 export class Triplet {
   constructor(a, b, c) {
@@ -24,18 +23,18 @@ export class Triplet {
 
   static where({ sum, minFactor = 1, maxFactor }) {
     const as = range(maxFactor, minFactor);
-    console.log(as);
     const results = [];
-    const s = new Set();
+    const cache = new Set();
     as.forEach(a => {
       const bs = range(maxFactor, minFactor);
       bs.forEach(b => {
         const cs = range(maxFactor, minFactor);
         cs.forEach(c => {
           if (Math.pow(a, 2) + Math.pow(b, 2) === Math.pow(c, 2)) {
-            const t = [a, b, c].sort().join(",");
-            if (!s.has(t)) {
-              s.add(t);
+            const str = [a, b, c].sort().join(",");
+            const t = new Triplet(a, b, c);
+            if (!cache.has(str) && (!sum || (sum && t.sum() === sum))) {
+              cache.add(str);
               results.push(new Triplet(a, b, c));
             }
           }
